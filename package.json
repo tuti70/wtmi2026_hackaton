@@ -21,8 +21,10 @@
   "homepage": "https://github.com/tuti70/wtmi2026_hackaton#readme",
   "dependencies": {
     "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
     "express": "^5.3.0",
     "multer": "^2.4.0",
+    "nodemailer": "^10.2.1",
     "sqlite3": "^6.0.1"
   }
 }
