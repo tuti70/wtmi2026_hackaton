@@ -12,14 +12,14 @@
           extend: {
             colors: {
               brand: {
-                50: '#f0fdf4',
-                100: '#dcfce7',
-                400: '#4ade80',
-                500: '#22c55e',
-                600: '#16a34a',
-                700: '#15803d',
-                800: '#166534',
-                900: '#14532d',
+                50: "#f0fdf4",
+                100: "#dcfce7",
+                400: "#4ade80",
+                500: "#22c55e",
+                600: "#16a34a",
+                700: "#15803d",
+                800: "#166534",
+                900: "#14532d",
               },
             },
           },
@@ -44,7 +44,8 @@
         }
       }
       body {
-        background-image: radial-gradient(
+        background-image:
+          radial-gradient(
             circle at 15% 20%,
             rgba(22, 163, 74, 0.07) 0%,
             transparent 45%
@@ -57,7 +58,9 @@
         background-attachment: fixed;
       }
       .card-hover {
-        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        transition:
+          box-shadow 0.2s ease,
+          transform 0.2s ease;
       }
       .card-hover:hover {
         transform: translateY(-2px);
@@ -65,12 +68,348 @@
       }
       .btn-gradient {
         background: #166534;
-        transition: background-color 0.2s ease, transform 0.2s ease;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease;
       }
       .btn-gradient:hover {
         background: #14532d;
         transform: translateY(-1px);
         box-shadow: 0 8px 20px -10px rgba(20, 83, 45, 0.8);
+      }
+      #citizen-form-area {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        min-height: calc(100vh - 68px);
+        overflow: hidden;
+        background-color: #103d35;
+      }
+      body:has(#home-section:not(.hidden)) main,
+      body:has(#citizen-auth-section:not(.hidden)) main,
+      body:has(#auth-section:not(.hidden)) main,
+      body:has(#citizen-account-section:not(.hidden)) main,
+      body:has(#citizen-section:not(.hidden)) main,
+      body:has(#admin-section:not(.hidden)) main {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        max-width: none;
+        padding: clamp(1rem, 3vw, 2rem);
+        background-color: #103d35;
+      }
+      body:has(#citizen-section:not(.hidden)) main {
+        padding: 0;
+      }
+      body:has(#home-section:not(.hidden)) > header,
+      body:has(#citizen-auth-section:not(.hidden)) > header,
+      body:has(#auth-section:not(.hidden)) > header,
+      body:has(#citizen-account-section:not(.hidden)) > header,
+      body:has(#citizen-section:not(.hidden)) > header,
+      body:has(#admin-section:not(.hidden)) > header {
+        background-color: rgba(232, 243, 234, 0.72);
+        border-color: rgba(236, 248, 239, 0.48);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      main > *:not(#triage-modal) {
+        position: relative;
+        z-index: 1;
+      }
+      #home-section article,
+      #home-section > div:last-child > div,
+      #home-section > div:last-child > section {
+        border: 1px solid #fff;
+        border-radius: 1rem;
+        background-color: #fff;
+        box-shadow: 0 14px 36px -24px rgba(2, 24, 20, 0.65);
+      }
+      #home-section > div:last-child > div {
+        background-color: #0f172a;
+        border-color: #0f172a;
+      }
+      #home-section > div:nth-last-child(2) > section:last-child {
+        background-color: #fff;
+      }
+      #home-section > div:first-child {
+        overflow: hidden;
+        background: #14532d !important;
+      }
+      #citizen-auth-section > div,
+      #auth-section > div,
+      #citizen-account-section > div:not(:first-child),
+      #admin-section > section {
+        border-color: rgba(232, 243, 234, 0.78);
+        background-color: rgba(232, 243, 234, 0.78);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      #citizen-auth-section > div > div:first-child,
+      #auth-section > div > div:first-child,
+      #citizen-account-section > div:first-child,
+      #admin-section > div:first-child {
+        background: #14532d !important;
+      }
+      #citizen-auth-section input,
+      #auth-section input,
+      #admin-section select {
+        border-color: rgba(132, 160, 141, 0.55);
+        background-color: rgba(205, 222, 210, 0.68);
+      }
+      #citizen-auth-section article {
+        border-color: rgba(236, 248, 239, 0.38);
+        background-color: rgba(232, 243, 234, 0.78);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+      #citizen-auth-section #citizen-anonymous-option {
+        border-color: rgba(236, 248, 239, 0.38);
+        background-color: rgba(232, 243, 234, 0.78);
+        color: #1e293b;
+      }
+      #citizen-auth-section article,
+      #citizen-account-section > div:not(:first-child),
+      #admin-section > section {
+        color: #1e293b;
+      }
+      #admin-section > button,
+      #admin-section > div.rounded-2xl {
+        background-color: rgba(232, 243, 234, 0.78);
+        border-color: rgba(232, 243, 234, 0.78);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+      #admin-section button[onclick^="filtrarDenuncias"] {
+        background-color: rgba(232, 243, 234, 0.78);
+        border-color: rgba(232, 243, 234, 0.78);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+      #admin-section > section > div:first-child {
+        border-color: rgba(232, 243, 234, 0.78);
+      }
+      #denuncia-form-card {
+        position: relative;
+        z-index: 1;
+        height: auto !important;
+        background-color: rgba(232, 243, 234, 0.72);
+        border: 0;
+        border-radius: 0;
+        box-shadow: 0 24px 70px -38px rgba(0, 0, 0, 0.72);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      #citizen-workspace {
+        overflow: hidden;
+        border: 1px solid rgba(236, 248, 239, 0.48);
+        border-radius: 1.5rem;
+        background-color: rgba(232, 243, 234, 0.72);
+        box-shadow: 0 24px 70px -38px rgba(0, 0, 0, 0.72);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      #citizen-workspace > div:first-child {
+        padding: 1.25rem;
+      }
+      #citizen-workspace > div:last-child {
+        padding: 1.25rem;
+      }
+      #citizen-workspace #denuncia-form-card {
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+      #citizen-form-area > .citizen-content {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 1280px);
+        margin: 0 auto;
+      }
+      #citizen-form-area .citizen-bubble {
+        position: absolute;
+        z-index: 0;
+        bottom: -9rem;
+        width: var(--bubble-size);
+        height: var(--bubble-size);
+        left: var(--bubble-left);
+        border: 1px solid rgba(209, 250, 229, 0.24);
+        border-radius: 50%;
+        background: rgba(167, 243, 208, 0.035);
+        box-shadow:
+          inset 10px 10px 30px rgba(255, 255, 255, 0.035),
+          0 0 34px rgba(110, 231, 183, 0.06);
+        animation: citizen-bubble-rise var(--bubble-duration) linear
+          var(--bubble-delay) infinite;
+        pointer-events: none;
+      }
+      #citizen-form-area .citizen-bubble:nth-of-type(1) {
+        --bubble-size: 74px;
+        --bubble-left: 8%;
+        --bubble-duration: 19s;
+        --bubble-delay: -11s;
+      }
+      #citizen-form-area .citizen-bubble:nth-of-type(2) {
+        --bubble-size: 34px;
+        --bubble-left: 23%;
+        --bubble-duration: 14s;
+        --bubble-delay: -4s;
+      }
+      #citizen-form-area .citizen-bubble:nth-of-type(3) {
+        --bubble-size: 112px;
+        --bubble-left: 40%;
+        --bubble-duration: 23s;
+        --bubble-delay: -17s;
+      }
+      #citizen-form-area .citizen-bubble:nth-of-type(4) {
+        --bubble-size: 48px;
+        --bubble-left: 61%;
+        --bubble-duration: 16s;
+        --bubble-delay: -8s;
+      }
+      #citizen-form-area .citizen-bubble:nth-of-type(5) {
+        --bubble-size: 88px;
+        --bubble-left: 82%;
+        --bubble-duration: 21s;
+        --bubble-delay: -13s;
+      }
+      @keyframes citizen-bubble-rise {
+        0% {
+          transform: translate3d(0, 0, 0) scale(0.8);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.7;
+        }
+        85% {
+          opacity: 0.55;
+        }
+        100% {
+          transform: translate3d(24px, -125vh, 0) scale(1.12);
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #citizen-form-area .citizen-bubble {
+          animation: none;
+          opacity: 0.35;
+        }
+      }
+      @media (max-width: 640px) {
+        #citizen-form-area > .citizen-content {
+          width: 100%;
+        }
+        #citizen-session-card:not(.hidden) {
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
+        #citizen-session-card #citizen-session-action {
+          margin-left: 3.25rem;
+        }
+      }
+      #citizen-form-area .citizen-intro h2 {
+        color: #f0fdf4;
+      }
+      #citizen-form-area .citizen-intro p,
+      #citizen-form-area .citizen-intro .citizen-feature {
+        color: #d1fae5;
+      }
+      #citizen-form-area .citizen-intro .citizen-highlight {
+        color: #6ee7b7;
+      }
+      #citizen-form-area .citizen-intro .citizen-tag {
+        border-color: rgba(209, 250, 229, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        color: #d1fae5;
+      }
+      #citizen-session-card {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+      #citizen-session-card:not(.hidden) {
+        display: flex;
+        width: auto;
+        max-width: none;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding: 0;
+      }
+      #citizen-session-card #citizen-session-icon {
+        background: transparent;
+      }
+      #citizen-session-card #citizen-session-state {
+        color: #a7f3d0;
+      }
+      #citizen-session-card #citizen-session-name {
+        color: #f0fdf4;
+      }
+      #citizen-session-card #citizen-session-action {
+        width: auto;
+        margin-top: 0;
+        white-space: nowrap;
+        border-color: transparent;
+        background: transparent;
+        color: #d1fae5;
+      }
+      #citizen-session-card #citizen-session-action:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      #citizen-map-card {
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+      #citizen-protocol-card {
+        margin-top: 1.25rem;
+        border-top: 1px solid rgba(148, 163, 184, 0.35);
+        padding: 1.25rem 0.25rem 0.25rem;
+      }
+      #citizen-protocols > div {
+        border-color: rgba(148, 163, 184, 0.45);
+        background-color: rgba(226, 237, 229, 0.6);
+      }
+      @media (min-width: 1280px) {
+        #citizen-workspace > div:first-child {
+          border-right: 1px solid rgba(16, 61, 53, 0.14);
+          padding: 1.75rem;
+        }
+        #citizen-workspace > div:last-child {
+          padding: 1.75rem;
+        }
+      }
+      .site-footer {
+        background: #103d35;
+        border-top: 1px solid rgba(209, 250, 229, 0.16);
+        color: #d1fae5;
+      }
+      .site-footer .footer-mark {
+        background: rgba(167, 243, 208, 0.12);
+        color: #a7f3d0;
+      }
+      #denuncia-form-card input[type="text"],
+      #denuncia-form-card select,
+      #denuncia-form-card textarea {
+        border-color: rgba(132, 160, 141, 0.55);
+        background-color: rgba(205, 222, 210, 0.58);
+      }
+      #denuncia-form-card input[type="text"]:focus,
+      #denuncia-form-card select:focus,
+      #denuncia-form-card textarea:focus {
+        background-color: rgba(232, 243, 234, 0.86);
+      }
+      #denuncia-form-card label[for="den-foto"] {
+        border-color: rgba(132, 160, 141, 0.48);
+        background-color: rgba(205, 222, 210, 0.42);
+      }
+      #denuncia-form-card label[for="den-foto"]:hover {
+        background-color: rgba(205, 222, 210, 0.68);
       }
       .badge-soft {
         background: rgba(34, 197, 94, 0.12);
@@ -83,7 +422,7 @@
         box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
       }
       .leaf-pulse::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: -6px;
         border-radius: 9999px;
@@ -118,7 +457,9 @@
     class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col"
   >
     <!-- HEADER -->
-    <header class="bg-white text-slate-800 border-b border-slate-200 sticky top-0 z-50">
+    <header
+      class="bg-white text-slate-800 border-b border-slate-200 sticky top-0 z-50"
+    >
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center"
       >
@@ -126,100 +467,249 @@
           <div
             class="relative w-10 h-10 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center"
           >
-            <i data-lucide="shield-check" class="w-5 h-5 text-brand-700"></i>
+            <svg
+              viewBox="0 0 24 24"
+              class="h-7 w-7 text-brand-700"
+              fill="none"
+              role="img"
+              aria-label="Máscara anônima"
+            >
+              <path
+                d="M3.1 8.2C4.2 4.7 7.8 2.5 12 2.5s7.8 2.2 8.9 5.7l-1 6.2c-.4 2.4-1.8 4.4-3.8 5.6L12 22l-4.1-2c-2-1.2-3.4-3.2-3.8-5.6l-1-6.2Z"
+                fill="#ecfdf5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="m5.1 9.3 5.7-1.5-.8 3.1-4.5 1.2-.4-2.8Zm13.8 0-5.7-1.5.8 3.1 4.5 1.2.4-2.8Z"
+                fill="currentColor"
+              />
+              <path
+                d="m12 9.2-.9 5.1.9 1 .9-1L12 9.2Z"
+                fill="#a7f3d0"
+                stroke="currentColor"
+                stroke-width=".7"
+                stroke-linejoin="round"
+              />
+            </svg>
           </div>
           <div class="leading-tight">
             <span class="text-lg font-extrabold tracking-tight">ZeroFoco</span>
-            <div class="text-[11px] text-slate-500">
+            <div class="hidden text-[11px] text-slate-500 sm:block">
               Saúde pública e cuidado com a comunidade
             </div>
           </div>
         </div>
-        <div id="user-info" class="hidden items-center gap-3">
-          <span
-            id="nav-username"
-            class="text-sm font-medium bg-white/10 px-3 py-1.5 rounded-lg border border-white/15"
-          ></span>
+        <div class="flex items-center gap-2 sm:gap-3">
           <button
-            onclick="logout()"
-            class="bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3.5 py-1.5 rounded-lg text-sm transition flex items-center gap-1.5"
+            id="citizen-account-nav"
+            onclick="mostrarPainelCidadao()"
+            class="hidden inline-flex items-center gap-1 rounded-xl border border-brand-200 bg-brand-50 px-2 py-1.5 text-left text-brand-900 transition hover:border-brand-300 hover:bg-brand-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            type="button"
           >
-            <i data-lucide="log-out" class="w-4 h-4"></i> Sair
+            <i
+              data-lucide="clipboard-list"
+              class="h-4 w-4 shrink-0 text-brand-700"
+            ></i>
+            <span class="text-[15px] font-extrabold leading-none">
+              Minhas denúncias
+            </span>
           </button>
+          <button
+            id="citizen-logout-nav"
+            onclick="sairDaContaCidadao()"
+            class="hidden inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-left text-[15px] font-semibold leading-none text-slate-700 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            type="button"
+          >
+            <i data-lucide="log-out" class="h-3.5 w-3.5"></i>
+            <span>Sair</span>
+          </button>
+          <div id="user-info" class="hidden items-center gap-3">
+            <span
+              id="nav-username"
+              class="text-sm font-medium bg-white/10 px-3 py-1.5 rounded-lg border border-white/15"
+            ></span>
+            <button
+              onclick="logout()"
+              class="bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3.5 py-1.5 rounded-lg text-sm transition flex items-center gap-1.5"
+            >
+              <i data-lucide="log-out" class="w-4 h-4"></i> Sair
+            </button>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
-      <section id="home-section" class="max-w-6xl mx-auto py-4 sm:py-8 space-y-8 sm:space-y-10">
-        <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-950 via-brand-900 to-teal-800 text-white shadow-xl">
-          <div class="absolute -top-28 -right-16 w-96 h-96 rounded-full border border-white/10"></div>
-          <div class="absolute -top-16 -right-4 w-72 h-72 rounded-full border border-white/10"></div>
-          <div class="absolute bottom-0 right-0 w-80 h-56 bg-teal-400/10 blur-3xl"></div>
-          <div class="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-center p-7 sm:p-10 lg:p-14">
+      <section
+        id="home-section"
+        class="max-w-6xl mx-auto py-4 sm:py-8 space-y-8 sm:space-y-10"
+      >
+        <div
+          class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-950 via-brand-900 to-teal-800 text-white shadow-xl"
+        >
+          <div
+            class="absolute -top-28 -right-16 w-96 h-96 rounded-full border border-white/10"
+          ></div>
+          <div
+            class="absolute -top-16 -right-4 w-72 h-72 rounded-full border border-white/10"
+          ></div>
+          <div
+            class="absolute bottom-0 right-0 w-80 h-56 bg-teal-400/10 blur-3xl"
+          ></div>
+          <div
+            class="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-center p-7 sm:p-10 lg:p-14"
+          >
             <div class="py-2">
-              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-100 bg-white/10 border border-white/15 px-3.5 py-2 rounded-full">
+              <span
+                class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-100 bg-white/10 border border-white/15 px-3.5 py-2 rounded-full"
+              >
                 <i data-lucide="heart-pulse" class="w-4 h-4"></i>
                 Cuidado que começa na vizinhança
               </span>
-              <h1 class="mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.05]">
+              <h1
+                class="mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.05]"
+              >
                 Uma cidade mais saudável começa com você.
               </h1>
-              <p class="mt-5 text-base sm:text-lg leading-relaxed text-emerald-50/85 max-w-xl">
-                Avistou um foco de dengue, lixo acumulado ou outra situação de risco? Avise a vigilância sanitária de forma simples e ajude sua comunidade.
+              <p
+                class="mt-5 text-base sm:text-lg leading-relaxed text-emerald-50/85 max-w-xl"
+              >
+                Avistou um foco de dengue, lixo acumulado ou outra situação de
+                risco? Avise a vigilância sanitária de forma simples e ajude sua
+                comunidade.
               </p>
               <div class="mt-8 flex flex-col sm:flex-row gap-3">
-                <button onclick="iniciarDenuncia()" class="bg-white hover:bg-emerald-50 text-emerald-950 font-bold px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-950/20">
+                <button
+                  onclick="iniciarDenuncia()"
+                  class="bg-white hover:bg-emerald-50 text-emerald-950 font-bold px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-950/20"
+                >
                   <i data-lucide="megaphone" class="w-5 h-5"></i>
                   Fazer uma denúncia
                   <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
-                <button onclick="mostrarLoginFiscal()" class="bg-white/10 hover:bg-white/15 text-white font-semibold px-5 py-3.5 rounded-xl border border-white/20 flex items-center justify-center gap-2 transition">
+                <button
+                  onclick="mostrarLoginFiscal()"
+                  class="bg-white/10 hover:bg-white/15 text-white font-semibold px-5 py-3.5 rounded-xl border border-white/20 flex items-center justify-center gap-2 transition"
+                >
                   <i data-lucide="landmark" class="w-5 h-5"></i>
                   Acesso da fiscalização
                 </button>
               </div>
-              <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs text-emerald-50/80">
-                <span class="inline-flex items-center gap-1.5"><i data-lucide="badge-check" class="w-4 h-4"></i> Opção de identidade demonstrativa</span>
-                <span class="inline-flex items-center gap-1.5"><i data-lucide="file-check-2" class="w-4 h-4"></i> Protocolo para acompanhar</span>
+              <div
+                class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs text-emerald-50/80"
+              >
+                <span class="inline-flex items-center gap-1.5"
+                  ><i data-lucide="badge-check" class="w-4 h-4"></i> Opção de
+                  identidade demonstrativa</span
+                >
+                <span class="inline-flex items-center gap-1.5"
+                  ><i data-lucide="file-check-2" class="w-4 h-4"></i> Protocolo
+                  para acompanhar</span
+                >
               </div>
             </div>
 
-            <div class="relative min-h-[290px] sm:min-h-[350px] flex items-center justify-center">
-              <div class="absolute inset-4 sm:inset-8 rounded-[2rem] border border-white/10 bg-white/[0.04] backdrop-blur-sm"></div>
-              <div class="relative w-full max-w-sm aspect-square rounded-[2rem] border border-white/15 bg-gradient-to-br from-emerald-800/70 to-teal-950/70 shadow-2xl overflow-hidden">
-                <div class="absolute inset-0 opacity-25" style="background-image: linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px); background-size: 34px 34px; transform: rotate(-8deg) scale(1.2);"></div>
-                <svg class="absolute inset-0 w-full h-full text-emerald-200/40" viewBox="0 0 360 360" fill="none" aria-hidden="true">
-                  <path d="M-10 78 95 120l75-45 93 48 112-41M-8 165l100 32 92-50 88 36 105-18M-12 258l106-44 78 52 89-42 106 38M76-10l27 104-21 85 32 85-17 106M184-8l-14 83 21 73-15 89 30 132M286-10l-28 88 25 79-15 93 30 115" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <div
+              class="relative min-h-[290px] sm:min-h-[350px] flex items-center justify-center"
+            >
+              <div
+                class="absolute inset-4 sm:inset-8 rounded-[2rem] border border-white/10 bg-white/[0.04] backdrop-blur-sm"
+              ></div>
+              <div
+                class="relative w-full max-w-sm aspect-square rounded-[2rem] border border-white/15 bg-gradient-to-br from-emerald-800/70 to-teal-950/70 shadow-2xl overflow-hidden"
+              >
+                <div
+                  class="absolute inset-0 opacity-25"
+                  style="
+                    background-image:
+                      linear-gradient(
+                        rgba(255, 255, 255, 0.16) 1px,
+                        transparent 1px
+                      ),
+                      linear-gradient(
+                        90deg,
+                        rgba(255, 255, 255, 0.16) 1px,
+                        transparent 1px
+                      );
+                    background-size: 34px 34px;
+                    transform: rotate(-8deg) scale(1.2);
+                  "
+                ></div>
+                <svg
+                  class="absolute inset-0 w-full h-full text-emerald-200/40"
+                  viewBox="0 0 360 360"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M-10 78 95 120l75-45 93 48 112-41M-8 165l100 32 92-50 88 36 105-18M-12 258l106-44 78 52 89-42 106 38M76-10l27 104-21 85 32 85-17 106M184-8l-14 83 21 73-15 89 30 132M286-10l-28 88 25 79-15 93 30 115"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
-                <div class="absolute left-[43%] top-[31%] w-24 h-24 rounded-full bg-emerald-300/15"></div>
-                <div class="absolute left-[48%] top-[37%] w-14 h-14 rounded-full bg-emerald-300/20"></div>
-                <div class="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl bg-white text-brand-800 shadow-xl shadow-emerald-950/30 flex items-center justify-center rotate-3">
+                <div
+                  class="absolute left-[43%] top-[31%] w-24 h-24 rounded-full bg-emerald-300/15"
+                ></div>
+                <div
+                  class="absolute left-[48%] top-[37%] w-14 h-14 rounded-full bg-emerald-300/20"
+                ></div>
+                <div
+                  class="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl bg-white text-brand-800 shadow-xl shadow-emerald-950/30 flex items-center justify-center rotate-3"
+                >
                   <i data-lucide="map-pin" class="w-8 h-8"></i>
                 </div>
-                <div class="absolute left-5 right-5 bottom-5 rounded-2xl bg-white text-slate-800 p-4 shadow-xl">
+                <div
+                  class="absolute left-5 right-5 bottom-5 rounded-2xl bg-white text-slate-800 p-4 shadow-xl"
+                >
                   <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+                    <span
+                      class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0"
+                    >
                       <i data-lucide="bug" class="w-5 h-5 text-amber-700"></i>
                     </span>
                     <div class="min-w-0">
-                      <p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Sua informação importa</p>
-                      <p class="text-sm font-extrabold text-slate-900">Ajude a localizar um risco</p>
+                      <p
+                        class="text-[10px] uppercase tracking-wider text-slate-500 font-bold"
+                      >
+                        Sua informação importa
+                      </p>
+                      <p class="text-sm font-extrabold text-slate-900">
+                        Ajude a localizar um risco
+                      </p>
                     </div>
-                    <i data-lucide="arrow-up-right" class="w-5 h-5 text-brand-700 ml-auto shrink-0"></i>
+                    <i
+                      data-lucide="arrow-up-right"
+                      class="w-5 h-5 text-brand-700 ml-auto shrink-0"
+                    ></i>
                   </div>
                 </div>
-                <div class="absolute top-5 right-5 w-11 h-11 rounded-2xl bg-amber-300 text-amber-950 flex items-center justify-center shadow-lg rotate-6">
+                <div
+                  class="absolute top-5 right-5 w-11 h-11 rounded-2xl bg-amber-300 text-amber-950 flex items-center justify-center shadow-lg rotate-6"
+                >
                   <i data-lucide="sparkles" class="w-5 h-5"></i>
                 </div>
               </div>
-              <div class="absolute left-0 sm:left-2 top-10 rounded-2xl bg-white text-slate-800 px-4 py-3 shadow-xl flex items-center gap-2.5 -rotate-3">
-                <span class="w-9 h-9 rounded-xl bg-rose-100 flex items-center justify-center"><i data-lucide="bug" class="w-4 h-4 text-rose-700"></i></span>
+              <div
+                class="absolute left-0 sm:left-2 top-10 rounded-2xl bg-white text-slate-800 px-4 py-3 shadow-xl flex items-center gap-2.5 -rotate-3"
+              >
+                <span
+                  class="w-9 h-9 rounded-xl bg-rose-100 flex items-center justify-center"
+                  ><i data-lucide="bug" class="w-4 h-4 text-rose-700"></i
+                ></span>
                 <span class="text-xs font-bold">Foco de dengue</span>
               </div>
-              <div class="absolute right-0 sm:right-2 top-24 rounded-2xl bg-white text-slate-800 px-4 py-3 shadow-xl flex items-center gap-2.5 rotate-2">
-                <span class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center"><i data-lucide="map" class="w-4 h-4 text-sky-700"></i></span>
+              <div
+                class="absolute right-0 sm:right-2 top-24 rounded-2xl bg-white text-slate-800 px-4 py-3 shadow-xl flex items-center gap-2.5 rotate-2"
+              >
+                <span
+                  class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center"
+                  ><i data-lucide="map" class="w-4 h-4 text-sky-700"></i
+                ></span>
                 <span class="text-xs font-bold">Localização</span>
               </div>
             </div>
@@ -227,333 +717,891 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-4">
-          <article class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm">
-            <span class="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center shrink-0"><i data-lucide="bug" class="w-5 h-5 text-rose-700"></i></span>
-            <div><h2 class="font-extrabold text-slate-900">Focos de dengue</h2><p class="mt-1 text-sm leading-relaxed text-slate-600">Água parada, criadouros ou locais com risco de proliferação.</p></div>
+          <article
+            class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center shrink-0"
+              ><i data-lucide="bug" class="w-5 h-5 text-rose-700"></i
+            ></span>
+            <div>
+              <h2 class="font-extrabold text-slate-900">Focos de dengue</h2>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Água parada, criadouros ou locais com risco de proliferação.
+              </p>
+            </div>
           </article>
-          <article class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm">
-            <span class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center shrink-0"><i data-lucide="trash-2" class="w-5 h-5 text-amber-700"></i></span>
-            <div><h2 class="font-extrabold text-slate-900">Lixo e entulho</h2><p class="mt-1 text-sm leading-relaxed text-slate-600">Descarte irregular ou acúmulo que possa afetar a saúde.</p></div>
+          <article
+            class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center shrink-0"
+              ><i data-lucide="trash-2" class="w-5 h-5 text-amber-700"></i
+            ></span>
+            <div>
+              <h2 class="font-extrabold text-slate-900">Lixo e entulho</h2>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Descarte irregular ou acúmulo que possa afetar a saúde.
+              </p>
+            </div>
           </article>
-          <article class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm">
-            <span class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center shrink-0"><i data-lucide="trees" class="w-5 h-5 text-brand-700"></i></span>
-            <div><h2 class="font-extrabold text-slate-900">Riscos no bairro</h2><p class="mt-1 text-sm leading-relaxed text-slate-600">Terrenos e outros pontos que merecem atenção da vigilância.</p></div>
+          <article
+            class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 flex gap-4 shadow-sm"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center shrink-0"
+              ><i data-lucide="trees" class="w-5 h-5 text-brand-700"></i
+            ></span>
+            <div>
+              <h2 class="font-extrabold text-slate-900">Riscos no bairro</h2>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Terrenos e outros pontos que merecem atenção da vigilância.
+              </p>
+            </div>
           </article>
         </div>
 
         <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-5 items-stretch">
-          <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <section
+            class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm"
+          >
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center"><i data-lucide="route" class="w-5 h-5 text-brand-700"></i></span>
-              <div><p class="text-xs uppercase tracking-wider font-bold text-brand-700">É simples participar</p><h2 class="text-xl font-extrabold text-slate-900">Como funciona</h2></div>
+              <span
+                class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center"
+                ><i data-lucide="route" class="w-5 h-5 text-brand-700"></i
+              ></span>
+              <div>
+                <p
+                  class="text-xs uppercase tracking-wider font-bold text-brand-700"
+                >
+                  É simples participar
+                </p>
+                <h2 class="text-xl font-extrabold text-slate-900">
+                  Como funciona
+                </h2>
+              </div>
             </div>
             <div class="mt-6 grid sm:grid-cols-3 gap-5">
-              <div><span class="text-xs font-extrabold text-brand-700">01</span><h3 class="mt-1 font-bold text-slate-900">Conte o que viu</h3><p class="mt-1 text-sm text-slate-600">Escolha o tipo e descreva a situação.</p></div>
-              <div><span class="text-xs font-extrabold text-brand-700">02</span><h3 class="mt-1 font-bold text-slate-900">Marque o local</h3><p class="mt-1 text-sm text-slate-600">Informe o endereço e, se puder, anexe uma foto.</p></div>
-              <div><span class="text-xs font-extrabold text-brand-700">03</span><h3 class="mt-1 font-bold text-slate-900">Guarde o protocolo</h3><p class="mt-1 text-sm text-slate-600">Use o código para consultar o andamento depois.</p></div>
+              <div>
+                <span class="text-xs font-extrabold text-brand-700">01</span>
+                <h3 class="mt-1 font-bold text-slate-900">Conte o que viu</h3>
+                <p class="mt-1 text-sm text-slate-600">
+                  Escolha o tipo e descreva a situação.
+                </p>
+              </div>
+              <div>
+                <span class="text-xs font-extrabold text-brand-700">02</span>
+                <h3 class="mt-1 font-bold text-slate-900">Marque o local</h3>
+                <p class="mt-1 text-sm text-slate-600">
+                  Informe o endereço e, se puder, anexe uma foto.
+                </p>
+              </div>
+              <div>
+                <span class="text-xs font-extrabold text-brand-700">03</span>
+                <h3 class="mt-1 font-bold text-slate-900">
+                  Guarde o protocolo
+                </h3>
+                <p class="mt-1 text-sm text-slate-600">
+                  Use o código para consultar o andamento depois.
+                </p>
+              </div>
             </div>
           </section>
 
-          <section class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 sm:p-8">
+          <section
+            class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 sm:p-8"
+          >
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-white flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5 text-brand-700"></i></span>
-              <h2 class="text-lg font-extrabold text-slate-900">Privacidade em primeiro lugar</h2>
+              <span
+                class="w-11 h-11 rounded-xl bg-white flex items-center justify-center"
+                ><i
+                  data-lucide="shield-check"
+                  class="w-5 h-5 text-brand-700"
+                ></i
+              ></span>
+              <h2 class="text-lg font-extrabold text-slate-900">
+                Privacidade em primeiro lugar
+              </h2>
             </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-700">Este protótipo oferece um fluxo de identidade fictícia para demonstração. Nenhum dado real é solicitado; em uma versão oficial, a verificação dependeria de integração autorizada.</p>
-            <button onclick="iniciarDenuncia()" class="mt-5 text-sm font-bold text-brand-800 hover:text-brand-900 inline-flex items-center gap-2">
+            <p class="mt-4 text-sm leading-relaxed text-slate-700">
+              Este protótipo oferece um fluxo de identidade fictícia para
+              demonstração. Nenhum dado real é solicitado; em uma versão
+              oficial, a verificação dependeria de integração autorizada.
+            </p>
+            <button
+              onclick="iniciarDenuncia()"
+              class="mt-5 text-sm font-bold text-brand-800 hover:text-brand-900 inline-flex items-center gap-2"
+            >
               Começar agora <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
           </section>
         </div>
 
         <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-5">
-          <div class="rounded-2xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between">
+          <div
+            class="rounded-2xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between"
+          >
             <div>
-              <span class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center"><i data-lucide="clipboard-check" class="w-5 h-5 text-emerald-300"></i></span>
+              <span
+                class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center"
+                ><i
+                  data-lucide="clipboard-check"
+                  class="w-5 h-5 text-emerald-300"
+                ></i
+              ></span>
               <h2 class="mt-4 text-xl font-extrabold">Já fez uma denúncia?</h2>
-              <p class="mt-2 text-sm leading-relaxed text-slate-300">Consulte o andamento pelo protocolo ou recupere o código usando sua chave secreta.</p>
+              <p class="mt-2 text-sm leading-relaxed text-slate-300">
+                Consulte o andamento pelo protocolo ou recupere o código usando
+                sua chave secreta.
+              </p>
             </div>
-            <p class="mt-5 text-xs text-slate-400 flex items-center gap-2"><i data-lucide="key-round" class="w-4 h-4"></i> Guarde a chave de recuperação separada do protocolo.</p>
+            <p class="mt-5 text-xs text-slate-400 flex items-center gap-2">
+              <i data-lucide="key-round" class="w-4 h-4"></i> Guarde a chave de
+              recuperação separada do protocolo.
+            </p>
           </div>
-          <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <section
+            class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm"
+          >
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center"><i data-lucide="search-check" class="w-5 h-5 text-slate-700"></i></span>
+              <span
+                class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center"
+                ><i
+                  data-lucide="search-check"
+                  class="w-5 h-5 text-slate-700"
+                ></i
+              ></span>
               <div>
-                <h2 class="font-extrabold text-slate-900">Acompanhar denúncia</h2>
-                <p class="text-sm text-slate-500">Consulte usando o protocolo recebido.</p>
+                <h2 class="font-extrabold text-slate-900">
+                  Acompanhar denúncia
+                </h2>
+                <p class="text-sm text-slate-500">
+                  Consulte usando o protocolo recebido.
+                </p>
               </div>
             </div>
-            <form onsubmit="consultarProtocolo(event)" class="mt-5 flex flex-col sm:flex-row gap-3">
-              <label for="protocolo-input" class="sr-only">Número do protocolo</label>
-              <input id="protocolo-input" type="text" autocomplete="off" required placeholder="Ex.: ZF-A1B2C3D4E5F6A7B8"
-                class="min-w-0 flex-1 px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm outline-none transition" />
-              <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-3 rounded-xl flex items-center justify-center gap-2 transition shrink-0">
+            <form
+              onsubmit="consultarProtocolo(event)"
+              class="mt-5 flex flex-col sm:flex-row gap-3"
+            >
+              <label for="protocolo-input" class="sr-only"
+                >Número do protocolo</label
+              >
+              <input
+                id="protocolo-input"
+                type="text"
+                autocomplete="off"
+                required
+                placeholder="Ex.: ZF-A1B2C3D4E5F6A7B8"
+                class="min-w-0 flex-1 px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm outline-none transition"
+              />
+              <button
+                type="submit"
+                class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-3 rounded-xl flex items-center justify-center gap-2 transition shrink-0"
+              >
                 <i data-lucide="search" class="w-4 h-4"></i> Consultar protocolo
               </button>
             </form>
-            <p id="protocolo-result" class="hidden mt-4 rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700" role="status" aria-live="polite"></p>
+            <p
+              id="protocolo-result"
+              class="hidden mt-4 rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700"
+              role="status"
+              aria-live="polite"
+            ></p>
             <div class="mt-6 border-t border-slate-200 pt-5">
-              <h3 class="text-sm font-bold text-slate-900">Perdeu o protocolo?</h3>
-              <p class="mt-1 text-xs leading-relaxed text-slate-500">Use a chave secreta recebida ao registrar uma denúncia anônima. Ela permite recuperar o protocolo sem informar sua identidade.</p>
-              <form onsubmit="recuperarProtocolo(event)" class="mt-3 flex flex-col gap-3 sm:flex-row">
-                <label for="recovery-key-input" class="sr-only">Chave secreta de recuperação</label>
-                <input id="recovery-key-input" type="text" autocomplete="off" required placeholder="Cole sua chave secreta de recuperação"
-                  class="min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 font-mono text-xs outline-none transition" />
-                <button type="submit" class="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-800">
-                  <i data-lucide="key-round" class="h-4 w-4"></i> Recuperar protocolo
+              <h3 class="text-sm font-bold text-slate-900">
+                Perdeu o protocolo?
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                Use a chave secreta recebida ao registrar uma denúncia anônima.
+                Ela permite recuperar o protocolo sem informar sua identidade.
+              </p>
+              <form
+                onsubmit="recuperarProtocolo(event)"
+                class="mt-3 flex flex-col gap-3 sm:flex-row"
+              >
+                <label for="recovery-key-input" class="sr-only"
+                  >Chave secreta de recuperação</label
+                >
+                <input
+                  id="recovery-key-input"
+                  type="text"
+                  autocomplete="off"
+                  required
+                  placeholder="Cole sua chave secreta de recuperação"
+                  class="min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 font-mono text-xs outline-none transition"
+                />
+                <button
+                  type="submit"
+                  class="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-800"
+                >
+                  <i data-lucide="key-round" class="h-4 w-4"></i> Recuperar
+                  protocolo
                 </button>
               </form>
-              <div id="recovery-result" class="hidden mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700" role="status" aria-live="polite"></div>
+              <div
+                id="recovery-result"
+                class="hidden mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700"
+                role="status"
+                aria-live="polite"
+              ></div>
             </div>
           </section>
         </div>
       </section>
 
       <section id="citizen-auth-section" class="hidden max-w-3xl mx-auto mt-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+        >
           <div class="bg-emerald-950 px-7 py-6 text-white">
-            <button onclick="voltarInicio()" class="text-sm text-emerald-100/80 hover:text-white flex items-center gap-1.5 mb-5">
+            <button
+              onclick="voltarInicio()"
+              class="text-sm text-emerald-100/80 hover:text-white flex items-center gap-1.5 mb-5"
+            >
               <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar ao início
             </button>
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
+              <span
+                class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center"
+              >
                 <i data-lucide="badge-check" class="w-5 h-5"></i>
               </span>
               <div>
-                <p class="text-xs uppercase tracking-wider font-bold text-emerald-200">Escolha seu modo de identificação</p>
-                <h1 class="text-xl font-extrabold">Como deseja fazer sua denúncia?</h1>
+                <p
+                  class="text-xs uppercase tracking-wider font-bold text-emerald-200"
+                >
+                  CPF não verificado
+                </p>
+                <h1 class="text-xl font-extrabold">
+                  Entre ou crie sua conta cidadã
+                </h1>
               </div>
             </div>
           </div>
           <div class="p-6 sm:p-7">
-            <p class="text-sm leading-relaxed text-slate-600">Nos dois modos, a equipe analisa o relato antes de qualquer encaminhamento. Escolha o que faz mais sentido para você.</p>
-            <div class="mt-5 grid md:grid-cols-2 gap-4">
-              <article class="rounded-2xl border-2 border-brand-200 bg-brand-50/50 p-5 flex flex-col">
-                <span class="w-11 h-11 rounded-xl bg-white flex items-center justify-center"><i data-lucide="user-round-check" class="w-5 h-5 text-brand-700"></i></span>
-                <h2 class="mt-4 font-extrabold text-slate-900">Identificada e confidencial</h2>
-                <p class="mt-2 text-sm leading-relaxed text-slate-600">Em um serviço oficial, sua identidade seria verificada e o acesso ficaria restrito às pessoas autorizadas, conforme as regras da prefeitura.</p>
-                <p class="mt-3 text-xs leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <strong>Neste protótipo:</strong> a identidade é apenas fictícia. Não há conexão com gov.br e não validamos uma pessoa real.
+            <p class="text-sm leading-relaxed text-slate-600">
+              Com sua conta, você pode voltar depois e consultar as denúncias
+              enviadas.
+            </p>
+            <div class="mt-5 grid gap-4">
+              <article
+                class="rounded-2xl border-2 border-brand-200 bg-brand-50/50 p-5 flex flex-col"
+              >
+                <span
+                  class="w-11 h-11 rounded-xl bg-white flex items-center justify-center"
+                  ><i
+                    data-lucide="user-round-check"
+                    class="w-5 h-5 text-brand-700"
+                  ></i
+                ></span>
+                <h2 class="mt-4 font-extrabold text-slate-900">
+                  Acessar com CPF e senha
+                </h2>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                  Entre na sua conta ou crie uma com um CPF válido e uma senha.
                 </p>
-                <button id="demo-auth-button" onclick="entrarComoDemo()" class="mt-auto pt-5 w-full" type="button">
-                  <span class="btn-gradient text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
-                    <i data-lucide="badge-check" class="w-5 h-5"></i>
-                    <span id="demo-auth-button-label">Simular denúncia identificada</span>
-                  </span>
-                </button>
+                <p
+                  class="mt-3 text-xs leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-lg p-3"
+                >
+                  <strong>Privacidade:</strong> o CPF e a senha não aparecem no
+                  relato nem são repassados ao responsável pela ordem de serviço.
+                  Usamos um identificador protegido para vincular os relatos à
+                  sua conta e permitir que você consulte seu histórico.
+                </p>
+                <form
+                  class="mt-auto pt-5 space-y-3"
+                  onsubmit="entrarContaCpf(event)"
+                >
+                  <div>
+                    <label
+                      for="backup-cpf"
+                      class="block text-xs font-semibold uppercase text-slate-600 mb-1"
+                      >CPF</label
+                    >
+                    <input
+                      id="backup-cpf"
+                      type="text"
+                      inputmode="numeric"
+                      autocomplete="username"
+                      maxlength="14"
+                      placeholder="000.000.000-00"
+                      required
+                      class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm outline-none transition"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="backup-password"
+                      class="block text-xs font-semibold uppercase text-slate-600 mb-1"
+                      >Senha</label
+                    >
+                    <input
+                      id="backup-password"
+                      type="password"
+                      autocomplete="current-password"
+                      minlength="8"
+                      maxlength="128"
+                      placeholder="Mínimo de 8 caracteres"
+                      required
+                      class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm outline-none transition"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      id="backup-login-button"
+                      class="btn-gradient rounded-xl py-3 text-sm font-bold text-white"
+                      type="submit"
+                    >
+                      Entrar
+                    </button>
+                    <button
+                      id="backup-register-button"
+                      class="rounded-xl border border-brand-200 bg-white py-3 text-sm font-bold text-brand-800 transition hover:bg-brand-50"
+                      type="button"
+                      onclick="entrarContaCpf(event, 'cadastro')"
+                    >
+                      Criar conta
+                    </button>
+                  </div>
+                  <p
+                    id="backup-cpf-error"
+                    class="hidden mt-3 text-sm text-rose-700"
+                    role="alert"
+                  ></p>
+                </form>
               </article>
-              <article class="rounded-2xl border border-slate-200 bg-white p-5 flex flex-col">
-                <span class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center"><i data-lucide="user-round-x" class="w-5 h-5 text-slate-700"></i></span>
-                <h2 class="mt-4 font-extrabold text-slate-900">Anônima</h2>
-                <p class="mt-2 text-sm leading-relaxed text-slate-600">Envie sem informar sua identidade. Inclua detalhes e a localização para ajudar a equipe a avaliar o relato.</p>
-                <p class="mt-3 text-xs leading-relaxed text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">O protocolo permite consultar o andamento. Não inclua dados pessoais no relato nem nas fotos.</p>
-                <button onclick="continuarSemIdentificacao()" class="mt-auto pt-5 w-full" type="button">
-                  <span class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition">
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i> Fazer denúncia anônima
+              <article
+                id="citizen-anonymous-option"
+                class="rounded-2xl border p-5 flex flex-col gap-4"
+              >
+                <h2 class="font-extrabold">Anônimo</h2>
+                <p class="text-sm leading-relaxed text-slate-600">
+                  Envie sem criar uma conta e sem informar CPF ou senha.
+                </p>
+                <button
+                  onclick="continuarSemIdentificacao()"
+                  class="w-full"
+                  type="button"
+                >
+                  <span
+                    class="btn-gradient text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition"
+                  >
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i> Fazer
+                    denúncia anônima
                   </span>
                 </button>
               </article>
             </div>
-            <div class="mt-5 rounded-xl border border-sky-200 bg-sky-50 p-4 flex gap-3">
-              <i data-lucide="clipboard-check" class="w-5 h-5 text-sky-800 shrink-0 mt-0.5"></i>
-              <p class="text-sm leading-relaxed text-sky-950"><strong>Triagem antes de agir:</strong> toda denúncia começa pendente e precisa ser analisada pela equipe. O envio, por si só, não aciona uma fiscalização.</p>
+            <div
+              class="mt-5 rounded-xl border border-sky-200 bg-sky-50 p-4 flex gap-3"
+            >
+              <i
+                data-lucide="clipboard-check"
+                class="w-5 h-5 text-sky-800 shrink-0 mt-0.5"
+              ></i>
+              <p class="text-sm leading-relaxed text-sky-950">
+                <strong>Triagem antes de agir:</strong> toda denúncia começa
+                pendente e precisa ser analisada pela equipe. O envio, por si
+                só, não aciona uma fiscalização.
+              </p>
             </div>
-            <p id="demo-auth-error" class="hidden text-sm text-rose-700" role="alert"></p>
           </div>
         </div>
       </section>
 
       <section id="auth-section" class="hidden max-w-md mx-auto mt-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+        >
           <div class="bg-slate-900 px-7 py-6 text-white">
-            <button onclick="voltarInicio()" class="text-sm text-slate-300 hover:text-white flex items-center gap-1.5 mb-5">
+            <button
+              onclick="voltarInicio()"
+              class="text-sm text-slate-300 hover:text-white flex items-center gap-1.5 mb-5"
+            >
               <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar ao início
             </button>
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
+              <span
+                class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center"
+              >
                 <i data-lucide="landmark" class="w-5 h-5"></i>
               </span>
               <div>
                 <h1 class="text-xl font-extrabold">Acesso da fiscalização</h1>
-                <p class="text-sm text-slate-300 mt-1">Área restrita a servidores autorizados.</p>
+                <p class="text-sm text-slate-300 mt-1">
+                  Área restrita a servidores autorizados.
+                </p>
               </div>
             </div>
           </div>
           <div class="p-7">
-            <form id="auth-form" onsubmit="handleLogin(event)" class="space-y-4">
+            <form
+              id="auth-form"
+              onsubmit="handleLogin(event)"
+              class="space-y-4"
+            >
               <div>
-                <label for="auth-input-1" class="block text-sm font-semibold text-slate-700 mb-1.5">Usuário</label>
-                <input type="text" id="auth-input-1" autocomplete="username" required placeholder="Digite seu usuário"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm transition outline-none" />
+                <label
+                  for="auth-input-1"
+                  class="block text-sm font-semibold text-slate-700 mb-1.5"
+                  >Usuário</label
+                >
+                <input
+                  type="text"
+                  id="auth-input-1"
+                  autocomplete="username"
+                  required
+                  placeholder="Digite seu usuário"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm transition outline-none"
+                />
               </div>
               <div>
-                <label for="auth-input-2-senha" class="block text-sm font-semibold text-slate-700 mb-1.5">Senha</label>
-                <input type="password" id="auth-input-2-senha" autocomplete="current-password" required placeholder="Digite sua senha"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm transition outline-none" />
+                <label
+                  for="auth-input-2-senha"
+                  class="block text-sm font-semibold text-slate-700 mb-1.5"
+                  >Senha</label
+                >
+                <input
+                  type="password"
+                  id="auth-input-2-senha"
+                  autocomplete="current-password"
+                  required
+                  placeholder="Digite sua senha"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-sm transition outline-none"
+                />
               </div>
-              <p id="auth-error" class="hidden text-sm text-rose-700" role="alert"></p>
-              <button type="submit" class="w-full btn-gradient text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm">
-                <i data-lucide="log-in" class="w-5 h-5"></i> Entrar na área restrita
+              <p
+                id="auth-error"
+                class="hidden text-sm text-rose-700"
+                role="alert"
+              ></p>
+              <button
+                type="submit"
+                class="w-full btn-gradient text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm"
+              >
+                <i data-lucide="log-in" class="w-5 h-5"></i> Entrar na área
+                restrita
               </button>
             </form>
           </div>
         </div>
       </section>
 
-      <!-- TELA 2: PAINEL DO CIDADÃO -->
-      <section id="citizen-section" class="hidden space-y-6">
-        <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-950 via-brand-900 to-teal-800 p-6 text-white shadow-xl sm:p-8 lg:p-10">
-          <div class="absolute -right-12 -top-16 h-64 w-64 rounded-full border border-white/10"></div>
-          <div class="absolute -right-2 -top-6 h-44 w-44 rounded-full border border-white/10"></div>
-          <div class="absolute bottom-0 right-0 h-40 w-64 bg-teal-300/10 blur-3xl"></div>
-          <div class="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div class="max-w-2xl">
-              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-100">
-                <i data-lucide="scan-line" class="h-4 w-4"></i>
-                Relato de risco à saúde
-              </div>
-              <h2 class="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                O seu olhar faz <span class="text-emerald-300">diferença.</span>
-              </h2>
-              <p id="citizen-mode-notice" class="mt-3 max-w-xl text-sm leading-relaxed text-emerald-50/85 sm:text-base">
-                Todas as denúncias começam pendentes e passam por análise antes de qualquer encaminhamento.
-              </p>
-              <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-emerald-50/90">
-                <span class="inline-flex items-center gap-2"><i data-lucide="clipboard-check" class="h-4 w-4 text-emerald-300"></i> Triagem antes do encaminhamento</span>
-                <span class="inline-flex items-center gap-2"><i data-lucide="map-pin" class="h-4 w-4 text-emerald-300"></i> Localização precisa no mapa</span>
-              </div>
-              <button onclick="sairDaAreaCidadao()" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white/90 transition hover:text-white">
-                <i data-lucide="arrow-left" class="h-4 w-4"></i> Voltar ao início
-              </button>
-            </div>
-            <div id="citizen-session-card" class="relative w-full rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm sm:min-w-64 sm:w-auto">
-              <div class="flex items-center gap-3">
-                <span id="citizen-session-icon" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15">
-                  <i data-lucide="user-round-check" class="h-5 w-5 text-emerald-100"></i>
-                </span>
-                <div>
-                  <p id="citizen-session-state" class="text-[10px] font-bold uppercase tracking-wider text-emerald-100">Sessão ativa</p>
-                  <p id="citizen-session-name" class="mt-1 text-sm font-bold text-white">Pessoa demonstrativa</p>
-                </div>
-              </div>
-              <button id="citizen-session-action" onclick="sairDaAreaCidadao()" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-semibold text-white transition hover:bg-white/20">
-                <i data-lucide="log-out" class="h-4 w-4"></i>
-                <span>Encerrar sessão</span>
-              </button>
-            </div>
+      <section
+        id="citizen-account-section"
+        class="hidden max-w-4xl mx-auto mt-6 space-y-5"
+      >
+        <div
+          class="overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-brand-900 to-teal-800 p-6 text-white shadow-xl sm:p-8"
+        >
+          <p
+            class="text-xs font-bold uppercase tracking-[0.16em] text-emerald-100"
+          >
+            Área do cidadão
+          </p>
+          <h1 class="mt-2 text-2xl font-extrabold">Minhas denúncias</h1>
+          <p class="mt-2 text-sm text-emerald-50/85">
+            Aqui ficam os protocolos enviados pela sua conta. O formulário de
+            denúncia continua disponível.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <button
+              onclick="iniciarNovaDenunciaComConta()"
+              class="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-emerald-950 transition hover:bg-emerald-50"
+            >
+              <i data-lucide="plus" class="h-4 w-4"></i> Fazer nova denúncia
+            </button>
           </div>
         </div>
-
-        <div class="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(340px,0.85fr)_minmax(0,1.35fr)]">
-          <div>
-            <div class="h-full rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-              <div class="mb-5 flex items-start justify-between gap-3">
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">Passo 1 <span class="text-slate-400">/ 3</span></p>
-                  <h3 class="mt-2 text-xl font-extrabold tracking-tight text-slate-900">Conte o que aconteceu</h3>
-                  <p class="mt-1 text-xs leading-relaxed text-slate-500">Descreva o problema com clareza para ajudar a equipe.</p>
-                </div>
-                <span id="citizen-identity-badge" class="shrink-0 rounded-lg bg-brand-100 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-wider text-brand-700">Anônimo</span>
-              </div>
-              <div class="mb-5 grid grid-cols-3 gap-2" aria-label="Etapas do envio">
-                <div class="h-1.5 rounded-full bg-brand-600"></div>
-                <div class="h-1.5 rounded-full bg-brand-200"></div>
-                <div class="h-1.5 rounded-full bg-slate-100"></div>
-              </div>
-              <form id="denuncia-form" onsubmit="criarDenuncia(event)" class="space-y-5">
-                <div>
-                  <label for="den-tipo" class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600">Tipo de ocorrência</label>
-                  <select id="den-tipo" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 outline-none transition">
-                    <option value="Foco de Dengue (Água Parada)">Foco de Dengue (Água Parada)</option>
-                    <option value="Terreno Baldio com Mato Alto">Terreno Baldio com Mato Alto</option>
-                    <option value="Acúmulo de Lixo / Entulho">Acúmulo de Lixo / Entulho</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="den-endereco" class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600">CEP ou endereço</label>
-                  <div class="flex gap-2">
-                    <input type="text" id="den-endereco" required placeholder="Digite o CEP ou a rua..." class="min-w-0 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition" />
-                    <button type="button" onclick="buscarLocalPorTexto()" class="flex shrink-0 items-center gap-1.5 rounded-xl bg-slate-800 px-3.5 py-3 text-xs font-semibold text-white transition hover:bg-slate-900">
-                      <i data-lucide="search" class="h-3.5 w-3.5"></i> Buscar
-                    </button>
-                  </div>
-                  <span class="mt-2 block text-[10px] text-slate-400">Ex.: 75650-000 ou Rua 7 de Setembro, Morrinhos GO</span>
-                </div>
-                <div>
-                  <label for="den-email" class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600">E-mail <span class="font-medium normal-case tracking-normal text-slate-400">· opcional</span></label>
-                  <input type="email" id="den-email" autocomplete="email" maxlength="254" oninput="alterarEmailDenuncia()" placeholder="voce@exemplo.com" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition" />
-                  <p class="mt-2 text-[10px] leading-relaxed text-slate-500">Se informar, confirme o endereço para receber o protocolo e a chave de recuperação. O e-mail não aparece para a fiscalização. Sem e-mail, a denúncia segue anônima e a chave é exibida apenas nesta tela.</p>
-                </div>
-                <div id="den-email-verification" class="hidden rounded-xl border border-sky-200 bg-sky-50 p-4">
-                  <label for="den-email-code" class="block text-[11px] font-bold uppercase tracking-wider text-sky-900">Código enviado para seu e-mail</label>
-                  <input type="text" id="den-email-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="000000" class="mt-2 w-full rounded-xl border border-sky-200 bg-white px-3.5 py-3 font-mono text-lg tracking-[0.3em] text-slate-900 outline-none transition" />
-                  <p id="den-email-verification-message" class="mt-2 text-xs leading-relaxed text-sky-900" role="status" aria-live="polite"></p>
-                  <button type="button" id="resend-den-email-code" onclick="reenviarCodigoEmail()" class="mt-2 text-xs font-semibold text-sky-800 underline decoration-sky-300 underline-offset-2 transition hover:text-sky-950">Enviar outro código</button>
-                </div>
-                <p id="denuncia-error" class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs leading-relaxed text-rose-800" role="alert"></p>
-                <div>
-                  <label for="den-desc" class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600">Descrição do problema</label>
-                  <textarea id="den-desc" rows="4" required placeholder="O que você encontrou? Informe detalhes que ajudem a localizar e entender a situação." class="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 outline-none transition"></textarea>
-                </div>
-                <div>
-                  <label class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600">Foto da ocorrência <span class="font-medium normal-case tracking-normal text-slate-400">· opcional</span></label>
-                  <label for="den-foto" class="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-left transition hover:border-brand-400 hover:bg-brand-50/60">
-                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100"><i data-lucide="camera" class="h-5 w-5 text-brand-700"></i></span>
-                    <span class="min-w-0">
-                      <span class="block text-xs font-semibold text-slate-700">Adicionar uma evidência</span>
-                      <span class="mt-1 block text-[10px] text-slate-400">JPG, PNG ou WEBP</span>
-                    </span>
-                    <i data-lucide="upload" class="ml-auto h-4 w-4 shrink-0 text-slate-400"></i>
-                  </label>
-                  <input type="file" id="den-foto" accept="image/*" class="hidden" />
-                </div>
-                <input type="hidden" id="den-lat" value="-17.7333689" />
-                <input type="hidden" id="den-lng" value="-49.105908" />
-                <button id="submit-denuncia-button" type="submit" class="btn-gradient flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-sm">
-                  <i data-lucide="send" class="h-4 w-4"></i>
-                  <span id="submit-denuncia-label">Enviar Denúncia</span>
-                </button>
-                <p class="text-center text-[10px] leading-relaxed text-slate-400">Evite incluir dados pessoais no relato ou nas fotos.</p>
-              </form>
+        <div
+          class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h2 class="font-extrabold text-slate-900">Protocolos da conta</h2>
+              <p class="mt-1 text-sm text-slate-500">
+                Consulte os protocolos e o andamento dos seus relatos.
+              </p>
             </div>
+            <button
+              onclick="carregarDenunciasDaConta()"
+              aria-label="Atualizar denúncias"
+              class="rounded-lg bg-slate-100 p-2.5 text-slate-700 transition hover:bg-slate-200"
+            >
+              <i data-lucide="refresh-cw" class="h-4 w-4"></i>
+            </button>
           </div>
+          <p
+            id="citizen-account-error"
+            class="hidden mt-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-800"
+            role="alert"
+          ></p>
+          <div id="citizen-account-reports" class="mt-5 space-y-3">
+            <p class="text-sm text-slate-500">Carregando suas denúncias...</p>
+          </div>
+        </div>
+      </section>
 
-          <div class="space-y-5">
-            <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-              <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <!-- TELA 2: PAINEL DO CIDADÃO -->
+      <section id="citizen-section" class="hidden">
+        <div id="citizen-form-area" class="p-4 sm:p-6 lg:p-8">
+          <span class="citizen-bubble" aria-hidden="true"></span>
+          <span class="citizen-bubble" aria-hidden="true"></span>
+          <span class="citizen-bubble" aria-hidden="true"></span>
+          <span class="citizen-bubble" aria-hidden="true"></span>
+          <span class="citizen-bubble" aria-hidden="true"></span>
+          <div class="citizen-content space-y-6">
+            <div
+              class="citizen-intro flex flex-col gap-5 border-b border-white/15 pb-5 lg:flex-row lg:items-center lg:justify-between"
+            >
+              <div class="max-w-2xl">
+                <div
+                  class="citizen-tag inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em]"
+                >
+                  <i data-lucide="scan-line" class="h-4 w-4"></i> Relato de
+                  risco à saúde
+                </div>
+                <h2
+                  class="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl"
+                >
+                  O seu olhar faz
+                  <span class="citizen-highlight">diferença.</span>
+                </h2>
+                <p
+                  id="citizen-mode-notice"
+                  class="mt-2 max-w-xl text-sm leading-relaxed text-slate-600"
+                >
+                  Todas as denúncias começam pendentes e passam por análise
+                  antes de qualquer encaminhamento.
+                </p>
+                <div
+                  class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium"
+                >
+                  <span class="citizen-feature inline-flex items-center gap-2"
+                    ><i
+                      data-lucide="clipboard-check"
+                      class="h-4 w-4 text-emerald-300"
+                    ></i>
+                    Triagem antes do encaminhamento</span
+                  >
+                  <span class="citizen-feature inline-flex items-center gap-2"
+                    ><i
+                      data-lucide="map-pin"
+                      class="h-4 w-4 text-emerald-300"
+                    ></i>
+                    Localização precisa no mapa</span
+                  >
+                </div>
+                <button
+                  id="citizen-back-action"
+                  onclick="sairDaAreaCidadao()"
+                  class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-emerald-200 transition hover:text-white"
+                >
+                  <i data-lucide="arrow-left" class="h-4 w-4"></i> Voltar ao
+                  início
+                </button>
+              </div>
+              <div
+                id="citizen-session-card"
+                class="hidden w-full p-2 lg:max-w-xs"
+              >
                 <div class="flex items-center gap-3">
-                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100"><i data-lucide="map-pinned" class="h-5 w-5 text-brand-700"></i></span>
+                  <span
+                    id="citizen-session-icon"
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50"
+                  >
+                    <i
+                      data-lucide="user-round-check"
+                      class="h-5 w-5 text-brand-700"
+                    ></i>
+                  </span>
                   <div>
-                    <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">Passo 2 <span class="text-slate-400">/ 3</span></p>
-                    <h3 class="mt-1 text-base font-extrabold text-slate-900">Marque o local no mapa</h3>
-                    <p class="mt-1 text-xs text-slate-500">Busque um endereço ou arraste o pino até o ponto exato.</p>
+                    <p
+                      id="citizen-session-state"
+                      class="text-[10px] font-bold uppercase tracking-wider text-brand-700"
+                    >
+                      Sessão ativa
+                    </p>
+                    <p
+                      id="citizen-session-name"
+                      class="mt-1 text-sm font-bold text-slate-900"
+                    >
+                      Pessoa demonstrativa
+                    </p>
                   </div>
                 </div>
-                <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-[10px] font-semibold text-brand-800">
-                  <i data-lucide="mouse-pointer-2" class="h-3.5 w-3.5 text-brand-700"></i> Mapa interativo
-                </span>
-              </div>
-              <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-inner">
-                <div id="map"></div>
-              </div>
-              <div class="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
-                <i data-lucide="move" class="h-3.5 w-3.5 text-brand-600"></i>
-                <span>Clique no mapa ou arraste o pino para ajustar a localização.</span>
+                <button
+                  id="citizen-session-action"
+                  onclick="sairDaAreaCidadao()"
+                  class="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  <i data-lucide="log-out" class="h-4 w-4"></i>
+                  <span>Trocar modo de envio</span>
+                </button>
               </div>
             </div>
 
-            <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-              <div class="mb-4 flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-100"><i data-lucide="ticket-check" class="h-5 w-5 text-brand-700"></i></span>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">Passo 3 <span class="text-slate-400">/ 3</span></p>
-                  <h3 class="mt-1 text-base font-extrabold text-slate-900">Seu protocolo</h3>
+            <div
+              id="citizen-workspace"
+              class="grid grid-cols-1 gap-0 xl:grid-cols-[minmax(340px,0.85fr)_minmax(0,1.35fr)]"
+            >
+              <div>
+                <div
+                  id="denuncia-form-card"
+                  class="h-full rounded-3xl border p-5 shadow-sm sm:p-6"
+                >
+                  <div class="mb-5 flex items-start justify-between gap-3">
+                    <div>
+                      <p
+                        class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700"
+                      >
+                        Passo 1 <span class="text-slate-400">/ 3</span>
+                      </p>
+                      <h3
+                        class="mt-2 text-xl font-extrabold tracking-tight text-slate-900"
+                      >
+                        Conte o que aconteceu
+                      </h3>
+                      <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                        Descreva o problema com clareza para ajudar a equipe.
+                      </p>
+                    </div>
+                    <span
+                      id="citizen-identity-badge"
+                      class="shrink-0 rounded-lg bg-brand-100 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-wider text-brand-700"
+                      >Anônimo</span
+                    >
+                  </div>
+                  <form
+                    id="denuncia-form"
+                    onsubmit="criarDenuncia(event)"
+                    class="space-y-5"
+                  >
+                    <div>
+                      <label
+                        for="den-tipo"
+                        class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600"
+                        >Tipo de ocorrência</label
+                      >
+                      <select
+                        id="den-tipo"
+                        class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 outline-none transition"
+                      >
+                        <option value="Foco de Dengue (Água Parada)">
+                          Foco de Dengue (Água Parada)
+                        </option>
+                        <option value="Terreno Baldio com Mato Alto">
+                          Terreno Baldio com Mato Alto
+                        </option>
+                        <option value="Acúmulo de Lixo / Entulho">
+                          Acúmulo de Lixo / Entulho
+                        </option>
+                      </select>
+                    </div>
+                    <div>
+                      <label
+                        for="den-endereco"
+                        class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600"
+                        >CEP ou endereço</label
+                      >
+                      <div class="flex gap-2">
+                        <input
+                          type="text"
+                          id="den-endereco"
+                          required
+                          placeholder="Digite o CEP ou a rua..."
+                          class="min-w-0 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition"
+                        />
+                        <button
+                          type="button"
+                          onclick="buscarLocalPorTexto()"
+                          class="flex shrink-0 items-center gap-1.5 rounded-xl bg-slate-800 px-3.5 py-3 text-xs font-semibold text-white transition hover:bg-slate-900"
+                        >
+                          <i data-lucide="search" class="h-3.5 w-3.5"></i>
+                          Buscar
+                        </button>
+                      </div>
+                      <span class="mt-2 block text-[10px] text-slate-400"
+                        >Ex.: 75650-000 ou Rua 7 de Setembro, Morrinhos GO</span
+                      >
+                    </div>
+                    <p
+                      id="denuncia-error"
+                      class="hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs leading-relaxed text-rose-800"
+                      role="alert"
+                    ></p>
+                    <div>
+                      <label
+                        for="den-desc"
+                        class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600"
+                        >Descrição do problema</label
+                      >
+                      <textarea
+                        id="den-desc"
+                        rows="4"
+                        required
+                        placeholder="O que você encontrou? Informe detalhes que ajudem a localizar e entender a situação."
+                        class="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 outline-none transition"
+                      ></textarea>
+                    </div>
+                    <div>
+                      <label
+                        class="mb-2 block text-[11px] font-bold uppercase tracking-wider text-slate-600"
+                        >Foto da ocorrência
+                        <span
+                          class="font-medium normal-case tracking-normal text-slate-400"
+                          >· opcional</span
+                        ></label
+                      >
+                      <label
+                        for="den-foto"
+                        class="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-left transition hover:border-brand-400 hover:bg-brand-50/60"
+                      >
+                        <span
+                          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100"
+                          ><i
+                            data-lucide="camera"
+                            class="h-5 w-5 text-brand-700"
+                          ></i
+                        ></span>
+                        <span class="min-w-0">
+                          <span
+                            class="block text-xs font-semibold text-slate-700"
+                            >Adicionar uma evidência</span
+                          >
+                          <span class="mt-1 block text-[10px] text-slate-400"
+                            >JPG, PNG ou WEBP</span
+                          >
+                        </span>
+                        <i
+                          data-lucide="upload"
+                          class="ml-auto h-4 w-4 shrink-0 text-slate-400"
+                        ></i>
+                      </label>
+                      <input
+                        type="file"
+                        id="den-foto"
+                        accept="image/*"
+                        class="hidden"
+                      />
+                    </div>
+                    <input type="hidden" id="den-lat" value="-17.7333689" />
+                    <input type="hidden" id="den-lng" value="-49.105908" />
+                    <button
+                      id="submit-denuncia-button"
+                      type="submit"
+                      class="btn-gradient flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-sm"
+                    >
+                      <i data-lucide="send" class="h-4 w-4"></i>
+                      <span id="submit-denuncia-label">Enviar Denúncia</span>
+                    </button>
+                    <p
+                      class="text-center text-[10px] leading-relaxed text-slate-400"
+                    >
+                      Evite incluir dados pessoais no relato ou nas fotos.
+                    </p>
+                  </form>
                 </div>
               </div>
-              <div id="citizen-protocols" class="space-y-3">
-                <div class="flex items-start gap-3 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4">
-                  <i data-lucide="bookmark" class="mt-0.5 h-4 w-4 shrink-0 text-brand-600"></i>
-                  <p class="text-xs leading-relaxed text-slate-500">Depois do envio, seu protocolo aparecerá aqui. Guarde o código para consultar o andamento na página inicial.</p>
+
+              <div class="space-y-5">
+                <div
+                  id="citizen-map-card"
+                  class="overflow-hidden rounded-3xl border border-white/70 p-4 shadow-sm sm:p-5"
+                >
+                  <div
+                    class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100"
+                        ><i
+                          data-lucide="map-pinned"
+                          class="h-5 w-5 text-brand-700"
+                        ></i
+                      ></span>
+                      <div>
+                        <p
+                          class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700"
+                        >
+                          Passo 2 <span class="text-slate-400">/ 3</span>
+                        </p>
+                        <h3
+                          class="mt-1 text-base font-extrabold text-slate-900"
+                        >
+                          Marque o local no mapa
+                        </h3>
+                        <p class="mt-1 text-xs text-slate-500">
+                          Busque um endereço ou arraste o pino até o ponto
+                          exato.
+                        </p>
+                      </div>
+                    </div>
+                    <span
+                      class="inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-[10px] font-semibold text-brand-800"
+                    >
+                      <i
+                        data-lucide="mouse-pointer-2"
+                        class="h-3.5 w-3.5 text-brand-700"
+                      ></i>
+                      Mapa interativo
+                    </span>
+                  </div>
+                  <div
+                    class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-inner"
+                  >
+                    <div id="map"></div>
+                  </div>
+                  <div
+                    class="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-slate-500"
+                  >
+                    <i
+                      data-lucide="move"
+                      class="h-3.5 w-3.5 text-brand-600"
+                    ></i>
+                    <span
+                      >Clique no mapa ou arraste o pino para ajustar a
+                      localização.</span
+                    >
+                  </div>
+                  <div id="citizen-protocol-card">
+                    <div class="mb-4 flex items-center gap-3">
+                      <span
+                        class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-100"
+                        ><i
+                          data-lucide="ticket-check"
+                          class="h-5 w-5 text-brand-700"
+                        ></i
+                      ></span>
+                      <div>
+                        <p
+                          class="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700"
+                        >
+                          Passo 3 <span class="text-slate-400">/ 3</span>
+                        </p>
+                        <h3
+                          class="mt-1 text-base font-extrabold text-slate-900"
+                        >
+                          Seu protocolo
+                        </h3>
+                      </div>
+                    </div>
+                    <div id="citizen-protocols" class="space-y-3">
+                      <div
+                        class="flex items-start gap-3 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4"
+                      >
+                        <i
+                          data-lucide="bookmark"
+                          class="mt-0.5 h-4 w-4 shrink-0 text-brand-600"
+                        ></i>
+                        <p class="text-xs leading-relaxed text-slate-500">
+                          Depois do envio, seu protocolo aparecerá aqui. Guarde
+                          o código para consultar o andamento na página inicial.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -565,7 +1613,14 @@
       <section id="admin-section" class="hidden space-y-6">
         <div
           class="rounded-2xl p-7 text-white shadow-lg flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 relative overflow-hidden"
-          style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f766e 100%)"
+          style="
+            background: linear-gradient(
+              135deg,
+              #0f172a 0%,
+              #1e293b 60%,
+              #0f766e 100%
+            );
+          "
         >
           <div
             class="absolute -top-14 -right-12 w-56 h-56 rounded-full bg-white/5"
@@ -581,7 +1636,8 @@
               Central de triagem
             </h2>
             <p class="text-slate-300 text-sm mt-1.5 max-w-xl">
-              Revise cada relato, registre sua decisão e só então encaminhe para atendimento.
+              Revise cada relato, registre sua decisão e só então encaminhe para
+              atendimento.
             </p>
           </div>
           <div class="relative">
@@ -594,122 +1650,323 @@
         </div>
 
         <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          <button onclick="filtrarDenuncias('Pendente')" class="text-left bg-white rounded-2xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
-            <span class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center"><i data-lucide="inbox" class="w-5 h-5 text-amber-700"></i></span>
-            <span id="count-pending" class="mt-4 block text-3xl font-extrabold text-slate-900">0</span>
-            <span class="mt-1 block text-sm font-semibold text-slate-600">Pendente de triagem</span>
+          <button
+            onclick="filtrarDenuncias('Pendente')"
+            class="text-left bg-white rounded-2xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition"
+          >
+            <span
+              class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center"
+              ><i data-lucide="inbox" class="w-5 h-5 text-amber-700"></i
+            ></span>
+            <span
+              id="count-pending"
+              class="mt-4 block text-3xl font-extrabold text-slate-900"
+              >0</span
+            >
+            <span class="mt-1 block text-sm font-semibold text-slate-600"
+              >Pendente de triagem</span
+            >
           </button>
-          <button onclick="filtrarDenuncias('Em Análise')" class="text-left bg-white rounded-2xl border border-sky-200 p-5 shadow-sm hover:shadow-md transition">
-            <span class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center"><i data-lucide="scan-search" class="w-5 h-5 text-sky-700"></i></span>
-            <span id="count-review" class="mt-4 block text-3xl font-extrabold text-slate-900">0</span>
-            <span class="mt-1 block text-sm font-semibold text-slate-600">Em análise</span>
+          <button
+            onclick="filtrarDenuncias('Em Análise')"
+            class="text-left bg-white rounded-2xl border border-sky-200 p-5 shadow-sm hover:shadow-md transition"
+          >
+            <span
+              class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center"
+              ><i data-lucide="scan-search" class="w-5 h-5 text-sky-700"></i
+            ></span>
+            <span
+              id="count-review"
+              class="mt-4 block text-3xl font-extrabold text-slate-900"
+              >0</span
+            >
+            <span class="mt-1 block text-sm font-semibold text-slate-600"
+              >Em análise</span
+            >
           </button>
-          <button onclick="filtrarDenuncias('Encaminhada')" class="text-left bg-white rounded-2xl border border-violet-200 p-5 shadow-sm hover:shadow-md transition">
-            <span class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center"><i data-lucide="send" class="w-5 h-5 text-violet-700"></i></span>
-            <span id="count-forwarded" class="mt-4 block text-3xl font-extrabold text-slate-900">0</span>
-            <span class="mt-1 block text-sm font-semibold text-slate-600">Encaminhadas</span>
+          <button
+            onclick="filtrarDenuncias('Encaminhada')"
+            class="text-left bg-white rounded-2xl border border-violet-200 p-5 shadow-sm hover:shadow-md transition"
+          >
+            <span
+              class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center"
+              ><i data-lucide="send" class="w-5 h-5 text-violet-700"></i
+            ></span>
+            <span
+              id="count-forwarded"
+              class="mt-4 block text-3xl font-extrabold text-slate-900"
+              >0</span
+            >
+            <span class="mt-1 block text-sm font-semibold text-slate-600"
+              >Encaminhadas</span
+            >
           </button>
-          <button onclick="filtrarDenuncias('Aguardando informações')" class="text-left bg-white rounded-2xl border border-orange-200 p-5 shadow-sm hover:shadow-md transition">
-            <span class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center"><i data-lucide="message-circle-question" class="w-5 h-5 text-orange-700"></i></span>
-            <span id="count-waiting" class="mt-4 block text-3xl font-extrabold text-slate-900">0</span>
-            <span class="mt-1 block text-sm font-semibold text-slate-600">Aguardando informações</span>
+          <button
+            onclick="filtrarDenuncias('Aguardando informações')"
+            class="text-left bg-white rounded-2xl border border-orange-200 p-5 shadow-sm hover:shadow-md transition"
+          >
+            <span
+              class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center"
+              ><i
+                data-lucide="message-circle-question"
+                class="w-5 h-5 text-orange-700"
+              ></i
+            ></span>
+            <span
+              id="count-waiting"
+              class="mt-4 block text-3xl font-extrabold text-slate-900"
+              >0</span
+            >
+            <span class="mt-1 block text-sm font-semibold text-slate-600"
+              >Aguardando informações</span
+            >
           </button>
         </div>
 
-        <div class="rounded-2xl border border-sky-200 bg-sky-50 p-4 sm:p-5 flex gap-3">
-          <i data-lucide="shield-check" class="w-5 h-5 text-sky-800 shrink-0 mt-0.5"></i>
+        <div
+          class="rounded-2xl border border-sky-200 bg-sky-50 p-4 sm:p-5 flex gap-3"
+        >
+          <i
+            data-lucide="shield-check"
+            class="w-5 h-5 text-sky-800 shrink-0 mt-0.5"
+          ></i>
           <div>
-            <h3 class="text-sm font-bold text-sky-950">A revisão vem antes do encaminhamento</h3>
-            <p class="mt-1 text-sm leading-relaxed text-sky-900">Abra o relato, confira localização, descrição e evidências. Registre uma nota para justificar encaminhamentos, pedidos de complemento ou encerramentos. Este protótipo não envia notificações ao cidadão.</p>
+            <h3 class="text-sm font-bold text-sky-950">
+              A revisão vem antes do encaminhamento
+            </h3>
+            <p class="mt-1 text-sm leading-relaxed text-sky-900">
+              Abra o relato, confira localização, descrição e evidências.
+              Registre uma nota para justificar encaminhamentos, pedidos de
+              complemento ou encerramentos. Este protótipo não envia
+              notificações ao cidadão.
+            </p>
           </div>
         </div>
 
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-          <div class="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row gap-4 sm:justify-between sm:items-center">
+        <section
+          class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div
+            class="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row gap-4 sm:justify-between sm:items-center"
+          >
             <div>
               <h3 class="font-extrabold text-slate-900">Fila de relatos</h3>
-              <p id="admin-filter-description" class="mt-1 text-sm text-slate-500">Todos os relatos, do mais recente ao mais antigo.</p>
+              <p
+                id="admin-filter-description"
+                class="mt-1 text-sm text-slate-500"
+              >
+                Todos os relatos, do mais recente ao mais antigo.
+              </p>
             </div>
             <div class="flex gap-2">
-              <select id="admin-status-filter" onchange="filtrarDenuncias(this.value)" class="px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm font-medium text-slate-700">
+              <select
+                id="admin-status-filter"
+                onchange="filtrarDenuncias(this.value)"
+                class="px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm font-medium text-slate-700"
+              >
                 <option value="Todos">Todos os status</option>
                 <option value="Pendente">Pendente de triagem</option>
                 <option value="Em Análise">Em análise</option>
                 <option value="Encaminhada">Encaminhadas</option>
-                <option value="Aguardando informações">Aguardando informações</option>
-                <option value="Encerrada sem encaminhamento">Encerradas sem encaminhamento</option>
+                <option value="Aguardando informações">
+                  Aguardando informações
+                </option>
+                <option value="Encerrada sem encaminhamento">
+                  Encerradas sem encaminhamento
+                </option>
                 <option value="Resolvido">Resolvidas</option>
               </select>
-              <button onclick="renderAdminTable()" aria-label="Atualizar fila" class="bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-semibold transition">
+              <button
+                onclick="renderAdminTable()"
+                aria-label="Atualizar fila"
+                class="bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-semibold transition"
+              >
                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
               </button>
             </div>
           </div>
           <div id="admin-report-list" class="divide-y divide-slate-100">
-            <p class="p-6 text-center text-sm text-slate-400">Carregando relatos...</p>
+            <p class="p-6 text-center text-sm text-slate-400">
+              Carregando relatos...
+            </p>
           </div>
         </section>
       </section>
 
-      <div id="triage-modal" class="hidden fixed inset-0 z-[100] bg-slate-950/60 p-3 sm:p-6 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="triage-modal-title" onclick="fecharTriageModal(event)">
-        <section class="bg-white w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl" onclick="event.stopPropagation()">
-          <div class="sticky top-0 z-10 bg-white border-b border-slate-200 px-5 sm:px-7 py-4 flex items-start justify-between gap-4">
+      <div
+        id="triage-modal"
+        class="hidden fixed inset-0 z-[100] bg-slate-950/60 p-3 sm:p-6 flex items-center justify-center"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="triage-modal-title"
+        onclick="fecharTriageModal(event)"
+      >
+        <section
+          class="bg-white w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl"
+          onclick="event.stopPropagation()"
+        >
+          <div
+            class="sticky top-0 z-10 bg-white border-b border-slate-200 px-5 sm:px-7 py-4 flex items-start justify-between gap-4"
+          >
             <div>
-              <p id="triage-modal-protocol" class="text-xs font-mono font-bold text-brand-700"></p>
-              <h2 id="triage-modal-title" class="mt-1 text-xl font-extrabold text-slate-900">Revisar relato</h2>
+              <p
+                id="triage-modal-protocol"
+                class="text-xs font-mono font-bold text-brand-700"
+              ></p>
+              <h2
+                id="triage-modal-title"
+                class="mt-1 text-xl font-extrabold text-slate-900"
+              >
+                Revisar relato
+              </h2>
             </div>
-            <button onclick="fecharTriageModal()" aria-label="Fechar revisão" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <button
+              onclick="fecharTriageModal()"
+              aria-label="Fechar revisão"
+              class="p-2 rounded-lg hover:bg-slate-100 text-slate-500"
+            >
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
           </div>
           <div class="p-5 sm:p-7 space-y-5">
             <div class="grid sm:grid-cols-2 gap-4">
               <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
-                <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500">Ocorrência</p>
-                <p id="triage-modal-type" class="mt-1 font-bold text-slate-900"></p>
-                <p id="triage-modal-date" class="mt-1 text-xs text-slate-500"></p>
+                <p
+                  class="text-[11px] uppercase tracking-wider font-bold text-slate-500"
+                >
+                  Ocorrência
+                </p>
+                <p
+                  id="triage-modal-type"
+                  class="mt-1 font-bold text-slate-900"
+                ></p>
+                <p
+                  id="triage-modal-date"
+                  class="mt-1 text-xs text-slate-500"
+                ></p>
               </div>
               <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
-                <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500">Identificação declarada</p>
-                <p id="triage-modal-identity" class="mt-1 font-semibold text-slate-900"></p>
-                <p id="triage-modal-status" class="mt-1 text-xs text-slate-500"></p>
+                <p
+                  class="text-[11px] uppercase tracking-wider font-bold text-slate-500"
+                >
+                  Identificação declarada
+                </p>
+                <p
+                  id="triage-modal-identity"
+                  class="mt-1 font-semibold text-slate-900"
+                ></p>
+                <p
+                  id="triage-modal-status"
+                  class="mt-1 text-xs text-slate-500"
+                ></p>
               </div>
             </div>
             <div>
-              <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500">Endereço</p>
-              <p id="triage-modal-address" class="mt-1 text-sm text-slate-800"></p>
-              <p id="triage-modal-coordinates" class="mt-1 text-xs text-slate-500"></p>
+              <p
+                class="text-[11px] uppercase tracking-wider font-bold text-slate-500"
+              >
+                Endereço
+              </p>
+              <p
+                id="triage-modal-address"
+                class="mt-1 text-sm text-slate-800"
+              ></p>
+              <p
+                id="triage-modal-coordinates"
+                class="mt-1 text-xs text-slate-500"
+              ></p>
             </div>
             <div>
-              <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500">Descrição do cidadão</p>
-              <p id="triage-modal-description" class="mt-2 whitespace-pre-wrap rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm leading-relaxed text-slate-800"></p>
+              <p
+                class="text-[11px] uppercase tracking-wider font-bold text-slate-500"
+              >
+                Descrição do cidadão
+              </p>
+              <p
+                id="triage-modal-description"
+                class="mt-2 whitespace-pre-wrap rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm leading-relaxed text-slate-800"
+              ></p>
             </div>
             <div id="triage-modal-image-wrapper" class="hidden">
-              <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500 mb-2">Evidência anexada</p>
-              <img id="triage-modal-image" alt="Imagem enviada com o relato" class="max-h-72 rounded-xl border border-slate-200 object-contain" />
+              <p
+                class="text-[11px] uppercase tracking-wider font-bold text-slate-500 mb-2"
+              >
+                Evidência anexada
+              </p>
+              <img
+                id="triage-modal-image"
+                alt="Imagem enviada com o relato"
+                class="max-h-72 rounded-xl border border-slate-200 object-contain"
+              />
             </div>
-            <div id="triage-modal-last-note-wrapper" class="hidden rounded-xl border border-slate-200 p-4">
-              <p class="text-[11px] uppercase tracking-wider font-bold text-slate-500">Última nota de triagem</p>
-              <p id="triage-modal-last-note" class="mt-2 whitespace-pre-wrap text-sm text-slate-700"></p>
+            <div
+              id="triage-modal-last-note-wrapper"
+              class="hidden rounded-xl border border-slate-200 p-4"
+            >
+              <p
+                class="text-[11px] uppercase tracking-wider font-bold text-slate-500"
+              >
+                Última nota de triagem
+              </p>
+              <p
+                id="triage-modal-last-note"
+                class="mt-2 whitespace-pre-wrap text-sm text-slate-700"
+              ></p>
             </div>
             <div class="rounded-xl border border-sky-200 bg-sky-50 p-4">
-              <label for="triage-note" class="block text-sm font-bold text-sky-950">Nota desta decisão</label>
-              <p class="mt-1 text-xs leading-relaxed text-sky-900">Obrigatória para encaminhar, aguardar informações, encerrar ou concluir. Não inclua dados pessoais desnecessários.</p>
-              <textarea id="triage-note" rows="3" class="mt-3 w-full px-3.5 py-2.5 rounded-xl border border-sky-200 bg-white text-sm outline-none" placeholder="Registre a justificativa ou a orientação..."></textarea>
+              <label
+                for="triage-note"
+                class="block text-sm font-bold text-sky-950"
+                >Nota desta decisão</label
+              >
+              <p class="mt-1 text-xs leading-relaxed text-sky-900">
+                Obrigatória para encaminhar, aguardar informações, encerrar ou
+                concluir. Não inclua dados pessoais desnecessários.
+              </p>
+              <textarea
+                id="triage-note"
+                rows="3"
+                class="mt-3 w-full px-3.5 py-2.5 rounded-xl border border-sky-200 bg-white text-sm outline-none"
+                placeholder="Registre a justificativa ou a orientação..."
+              ></textarea>
             </div>
-            <p id="triage-modal-error" class="hidden text-sm text-rose-700" role="alert"></p>
-            <div id="triage-actions" class="flex flex-wrap justify-end gap-2"></div>
+            <p
+              id="triage-modal-error"
+              class="hidden text-sm text-rose-700"
+              role="alert"
+            ></p>
+            <div
+              id="triage-actions"
+              class="flex flex-wrap justify-end gap-2"
+            ></div>
           </div>
         </section>
       </div>
     </main>
 
     <!-- FOOTER -->
-    <footer
-      class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400"
-    >
-      <p class="font-semibold text-slate-500">
-        ZeroFoco <span class="text-brand-600">•</span> Saúde pública e cuidado com a comunidade
-      </p>
-      <p class="mt-1">Evite incluir dados pessoais no relato ou nas fotos.</p>
+    <footer class="site-footer px-4 py-5 sm:px-6">
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="footer-mark flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+          >
+            <i data-lucide="bug" class="h-5 w-5"></i>
+          </span>
+          <div>
+            <p class="text-sm font-extrabold text-white">ZeroFoco</p>
+            <p class="mt-0.5 text-xs text-emerald-100/75">
+              Combater a dengue começa com atenção aos focos.
+            </p>
+          </div>
+        </div>
+        <p class="max-w-md text-[11px] leading-relaxed text-emerald-100/70">
+          Registre água parada e outros riscos no seu bairro. Evite incluir
+          dados pessoais no relato ou nas fotos.
+        </p>
+      </div>
     </footer>
 
     <!-- Leaflet JS -->

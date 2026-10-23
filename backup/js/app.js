@@ -17,26 +17,33 @@ let demoSession = null;
 let accountSession = null;
 let modoAnonimo = false;
 let localizacaoAlteradaPeloUsuario = false;
-let desafioEmailId = null;
-let desafioEmailEndereco = '';
-let emailVerificadoToken = null;
-let emailVerificadoEndereco = '';
 let envioDenunciaEmAndamento = false;
 
 let map = null;
 let marker = null;
 
-window.onload = function () {
+window.onload = async function () {
     if (currentUser && currentUser.role === 'admin') {
         mostrarPainelCorreto();
     } else {
         currentUser = null;
         localStorage.removeItem('zerafoco_user');
-        voltarInicio();
+        const citizenToken = sessionStorage.getItem('zerafoco_citizen_session');
+        if (citizenToken) {
+            accountSession = { token: citizenToken };
+            if (sessionStorage.getItem('zerafoco_citizen_screen') === 'form') {
+                abrirFormularioDenuncia();
+            } else {
+                await mostrarPainelCidadao();
+            }
+        } else {
+            voltarInicio();
+        }
     }
 };
 
 function voltarInicio() {
+    atualizarNavContaCidadao(false);
     document.getElementById('home-section').classList.remove('hidden');
     document.getElementById('citizen-auth-section').classList.add('hidden');
     document.getElementById('citizen-account-section').classList.add('hidden');
@@ -46,7 +53,15 @@ function voltarInicio() {
     document.getElementById('user-info').classList.add('hidden');
 }
 
+function atualizarNavContaCidadao(ativa) {
+    const button = document.getElementById('citizen-account-nav');
+    const logoutButton = document.getElementById('citizen-logout-nav');
+    button.classList.toggle('hidden', !ativa);
+    logoutButton.classList.toggle('hidden', !ativa);
+}
+
 function iniciarDenuncia() {
+    atualizarNavContaCidadao(false);
     document.getElementById('home-section').classList.add('hidden');
     document.getElementById('citizen-auth-section').classList.remove('hidden');
     document.getElementById('citizen-account-section').classList.add('hidden');
@@ -112,9 +127,15 @@ async function entrarContaCpf(event, action = 'entrar') {
         }
 
         accountSession = { token: result.token };
+        sessionStorage.setItem('zerafoco_citizen_session', result.token);
+        sessionStorage.setItem('zerafoco_citizen_screen', action === 'entrar' ? 'history' : 'form');
         passwordInput.value = '';
         modoAnonimo = false;
-        abrirFormularioDenuncia();
+        if (action === 'entrar') {
+            await mostrarPainelCidadao();
+        } else {
+            abrirFormularioDenuncia();
+        }
     } catch (error) {
         console.error('Erro ao acessar conta cidadã do backup:', error);
         errorMessage.textContent = error.message || 'Não foi possível conectar ao sistema.';
@@ -144,11 +165,17 @@ async function lerRespostaJson(response) {
 function continuarSemIdentificacao() {
     demoSession = null;
     accountSession = null;
+    sessionStorage.removeItem('zerafoco_citizen_session');
+    sessionStorage.removeItem('zerafoco_citizen_screen');
     modoAnonimo = true;
     abrirFormularioDenuncia();
 }
 
 async function mostrarPainelCidadao(protocoloNovo = '') {
+    if (accountSession) {
+        sessionStorage.setItem('zerafoco_citizen_screen', 'history');
+    }
+    atualizarNavContaCidadao(true);
     document.getElementById('home-section').classList.add('hidden');
     document.getElementById('citizen-auth-section').classList.add('hidden');
     document.getElementById('citizen-account-section').classList.remove('hidden');
@@ -172,7 +199,15 @@ async function carregarDenunciasDaConta(protocoloNovo = '') {
             headers: { Authorization: `Bearer ${accountSession.token}` }
         });
         const result = await lerRespostaJson(response);
-        if (!response.ok) throw new Error(result.erro || 'Não foi possível carregar suas denúncias.');
+        if (!response.ok) {
+            if (response.status === 401) {
+                accountSession = null;
+                sessionStorage.removeItem('zerafoco_citizen_session');
+                sessionStorage.removeItem('zerafoco_citizen_screen');
+                throw new Error('Sua sessão expirou. Entre novamente para consultar suas denúncias.');
+            }
+            throw new Error(result.erro || 'Não foi possível carregar suas denúncias.');
+        }
 
         if (result.length === 0) {
             list.innerHTML = '<div class="rounded-xl border border-dashed border-slate-300 p-6 text-center"><p class="font-semibold text-slate-700">Nenhuma denúncia nesta conta ainda.</p><p class="mt-1 text-sm text-slate-500">Seus próximos protocolos aparecerão aqui.</p></div>';
@@ -187,8 +222,9 @@ async function carregarDenunciasDaConta(protocoloNovo = '') {
                         <h3 class="mt-1 font-bold text-slate-900">${escaparHtml(denuncia.tipo)}</h3>
                         <p class="mt-1 text-xs text-slate-500">${escaparHtml(denuncia.endereco)} · ${escaparHtml(denuncia.data)}</p>
                     </div>
-                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">${escaparHtml(denuncia.status)}</span>
+                    <span class="rounded-full px-3 py-1 text-xs font-semibold ${classeStatus(denuncia.status)}">${escaparHtml(rotuloStatus(denuncia.status))}</span>
                 </div>
+                <p class="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm leading-relaxed text-slate-700">${escaparHtml(descricaoStatusDenuncia(denuncia.status))}</p>
                 ${denuncia.protocolo === protocoloNovo ? '<p class="mt-3 text-xs font-semibold text-brand-800">Denúncia registrada. Guarde seu protocolo para referência.</p>' : ''}
             </article>
         `).join('');
@@ -209,6 +245,8 @@ function iniciarNovaDenunciaComConta() {
 async function sairDaContaCidadao() {
     const token = accountSession && accountSession.token;
     accountSession = null;
+    sessionStorage.removeItem('zerafoco_citizen_session');
+    sessionStorage.removeItem('zerafoco_citizen_screen');
     document.getElementById('denuncia-form').reset();
     if (token) {
         try {
@@ -226,6 +264,10 @@ async function sairDaContaCidadao() {
 }
 
 function abrirFormularioDenuncia() {
+    if (accountSession) {
+        sessionStorage.setItem('zerafoco_citizen_screen', 'form');
+    }
+    atualizarNavContaCidadao(Boolean(accountSession));
     document.getElementById('home-section').classList.add('hidden');
     document.getElementById('citizen-auth-section').classList.add('hidden');
     document.getElementById('citizen-account-section').classList.add('hidden');
@@ -242,38 +284,44 @@ function abrirFormularioDenuncia() {
     const sessionAction = document.getElementById('citizen-session-action');
     const sessionCard = document.getElementById('citizen-session-card');
     const backAction = document.getElementById('citizen-back-action');
+    const sessionIcon = document.getElementById('citizen-session-icon');
     if (accountSession) {
-        notice.textContent = 'Conta do protótipo conectada. O CPF não teve sua titularidade verificada; as denúncias ficam vinculadas a esta conta.';
+        notice.textContent = 'Conta conectada. As denúncias enviadas por aqui ficarão vinculadas a esta conta e poderão ser acompanhadas em Minhas denúncias.';
         submitLabel.textContent = 'Enviar denúncia para minha conta';
-        identityBadge.textContent = 'Conta do protótipo';
-        sessionState.textContent = 'Conta cidadã ativa';
-        sessionName.textContent = 'CPF cadastrado (não verificado)';
-        sessionAction.querySelector('span').textContent = 'Sair da conta';
-        sessionAction.setAttribute('onclick', 'sairDaContaCidadao()');
-        backAction.innerHTML = '<i data-lucide="clipboard-list" class="h-4 w-4"></i> Minhas denúncias';
-        backAction.setAttribute('onclick', 'mostrarPainelCidadao()');
-        sessionCard.classList.remove('hidden');
+        identityBadge.textContent = 'Conta conectada';
+        backAction.classList.add('hidden');
+        sessionCard.classList.add('hidden');
     } else if (demoSession) {
-        notice.textContent = 'CPF conferido apenas pelos dígitos verificadores. A titularidade não foi confirmada e o número não foi enviado nem salvo.';
+        notice.textContent = 'Modo demonstrativo: os dados informados não são enviados nem associados ao relato.';
         submitLabel.textContent = 'Enviar denúncia identificada (simulação)';
         identityBadge.textContent = 'Identidade simulada';
         sessionState.textContent = 'Sessão demonstrativa ativa';
         sessionName.textContent = demoSession.label;
+        sessionIcon.innerHTML = '<i data-lucide="user-round-check" class="h-5 w-5 text-brand-700"></i>';
         sessionAction.querySelector('span').textContent = 'Sair da conta demonstrativa';
         sessionAction.setAttribute('onclick', 'sairDaAreaCidadao()');
         backAction.innerHTML = '<i data-lucide="arrow-left" class="h-4 w-4"></i> Voltar ao início';
         backAction.setAttribute('onclick', 'sairDaAreaCidadao()');
+        backAction.classList.remove('hidden');
         sessionCard.classList.remove('hidden');
     } else {
-        notice.textContent = 'Você está enviando sem identificação. Guarde o protocolo para consultar o andamento.';
+        notice.textContent = 'Você está enviando sem identificação. Nenhum dado de perfil é associado ao relato; guarde o protocolo para consultar o andamento.';
         submitLabel.textContent = 'Enviar denúncia sem identificação';
-        identityBadge.textContent = 'Sem identificação';
-        sessionState.textContent = 'Modo atual';
-        sessionName.textContent = 'Sem identificação';
+        identityBadge.textContent = 'Anônimo';
+        sessionState.textContent = 'Perfil anônimo';
+        sessionName.textContent = 'Identidade não informada';
+        sessionIcon.innerHTML = `
+            <svg viewBox="0 0 24 24" class="h-7 w-7 text-brand-700" fill="none" role="img" aria-label="Máscara anônima">
+                <path d="M3.1 8.2C4.2 4.7 7.8 2.5 12 2.5s7.8 2.2 8.9 5.7l-1 6.2c-.4 2.4-1.8 4.4-3.8 5.6L12 22l-4.1-2c-2-1.2-3.4-3.2-3.8-5.6l-1-6.2Z" fill="#ecfdf5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="m5.1 9.3 5.7-1.5-.8 3.1-4.5 1.2-.4-2.8Zm13.8 0-5.7-1.5.8 3.1 4.5 1.2.4-2.8Z" fill="currentColor" />
+                <path d="m12 9.2-.9 5.1.9 1 .9-1L12 9.2Z" fill="#a7f3d0" stroke="currentColor" stroke-width=".7" stroke-linejoin="round" />
+            </svg>
+        `;
         sessionAction.querySelector('span').textContent = 'Trocar modo de envio';
         sessionAction.setAttribute('onclick', 'iniciarDenuncia()');
         backAction.innerHTML = '<i data-lucide="arrow-left" class="h-4 w-4"></i> Voltar ao início';
         backAction.setAttribute('onclick', 'voltarInicio()');
+        backAction.classList.remove('hidden');
         sessionCard.classList.remove('hidden');
     }
 
@@ -308,6 +356,7 @@ async function sairDaAreaCidadao() {
 }
 
 function mostrarLoginFiscal() {
+    atualizarNavContaCidadao(false);
     document.getElementById('home-section').classList.add('hidden');
     document.getElementById('citizen-auth-section').classList.add('hidden');
     document.getElementById('citizen-account-section').classList.add('hidden');
@@ -361,6 +410,7 @@ function logout() {
 }
 
 function mostrarPainelCorreto() {
+    atualizarNavContaCidadao(false);
     document.getElementById('home-section').classList.add('hidden');
     document.getElementById('auth-section').classList.add('hidden');
     document.getElementById('user-info').classList.remove('hidden');
@@ -485,22 +535,6 @@ function initMap() {
     posicionarEnderecoInicialNoMapa();
 }
 
-function alterarEmailDenuncia() {
-    const email = document.getElementById('den-email').value.trim().toLowerCase();
-    if ((email === desafioEmailEndereco && desafioEmailId) || (email === emailVerificadoEndereco && emailVerificadoToken)) return;
-
-    desafioEmailId = null;
-    desafioEmailEndereco = '';
-    emailVerificadoToken = null;
-    emailVerificadoEndereco = '';
-    document.getElementById('den-email-verification').classList.add('hidden');
-    document.getElementById('den-email-code').value = '';
-    document.getElementById('den-email-verification-message').textContent = '';
-    document.getElementById('submit-denuncia-label').textContent = demoSession
-        ? 'Enviar denúncia identificada (simulação)'
-        : 'Enviar denúncia sem identificação';
-}
-
 async function criarDenuncia(event) {
     event.preventDefault();
     if (envioDenunciaEmAndamento) return;
@@ -511,7 +545,6 @@ async function criarDenuncia(event) {
     const lat = document.getElementById('den-lat').value;
     const lng = document.getElementById('den-lng').value;
     const fotoInput = document.getElementById('den-foto');
-    const email = document.getElementById('den-email').value.trim().toLowerCase();
     const submitButton = document.getElementById('submit-denuncia-button');
     const submitLabel = document.getElementById('submit-denuncia-label');
     const errorMessage = document.getElementById('denuncia-error');
@@ -526,46 +559,6 @@ async function criarDenuncia(event) {
     submitButton.disabled = true;
 
     try {
-        let verificationToken = null;
-        if (email) {
-            if (emailVerificadoEndereco !== email || !emailVerificadoToken) {
-                if (desafioEmailEndereco !== email || !desafioEmailId) {
-                    submitLabel.textContent = 'Enviando código...';
-                    const response = await fetch(`${API_URL}/email/codigo`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email })
-                    });
-                    const result = await response.json();
-                    if (!response.ok) throw new Error(result.erro || 'Não foi possível enviar o código.');
-
-                    desafioEmailId = result.challengeId;
-                    desafioEmailEndereco = email;
-                    document.getElementById('den-email-verification').classList.remove('hidden');
-                    document.getElementById('den-email-verification-message').textContent = 'Código enviado. Ele expira em 10 minutos. Digite-o para confirmar o e-mail e enviar a denúncia.';
-                    submitLabel.textContent = 'Confirmar e enviar denúncia';
-                    document.getElementById('den-email-code').focus();
-                    return;
-                }
-
-                submitLabel.textContent = 'Confirmando e-mail...';
-                const response = await fetch(`${API_URL}/email/verificar`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        challengeId: desafioEmailId,
-                        codigo: document.getElementById('den-email-code').value
-                    })
-                });
-                const result = await response.json();
-                if (!response.ok) throw new Error(result.erro || 'Não foi possível confirmar o e-mail.');
-
-                emailVerificadoToken = result.token;
-                emailVerificadoEndereco = email;
-            }
-            verificationToken = emailVerificadoToken;
-        }
-
         const protocolo = "ZF-" + Array.from(crypto.getRandomValues(new Uint8Array(8)), byte => byte.toString(16).padStart(2, '0')).join('').toUpperCase();
         const data = new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         let imagemBase64 = null;
@@ -578,48 +571,21 @@ async function criarDenuncia(event) {
             });
         }
 
-        await enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, data, imagemBase64, email, verificationToken);
+        await enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, data, imagemBase64);
     } catch (error) {
         console.error('Erro ao preparar a denúncia:', error);
         errorMessage.textContent = error.message || 'Não foi possível continuar. Tente novamente.';
         errorMessage.classList.remove('hidden');
-        submitLabel.textContent = desafioEmailId
-            ? 'Confirmar e enviar denúncia'
-            : (demoSession ? 'Enviar denúncia identificada (simulação)' : 'Enviar denúncia sem identificação');
+        submitLabel.textContent = demoSession
+            ? 'Enviar denúncia identificada (simulação)'
+            : (accountSession ? 'Enviar denúncia para minha conta' : 'Enviar denúncia sem identificação');
     } finally {
         envioDenunciaEmAndamento = false;
         submitButton.disabled = false;
     }
 }
 
-async function reenviarCodigoEmail() {
-    const email = document.getElementById('den-email').value.trim().toLowerCase();
-    const message = document.getElementById('den-email-verification-message');
-    const button = document.getElementById('resend-den-email-code');
-    button.disabled = true;
-    message.textContent = 'Enviando novo código...';
-
-    try {
-        const response = await fetch(`${API_URL}/email/codigo`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        });
-        const result = await response.json();
-        if (!response.ok) throw new Error(result.erro || 'Não foi possível enviar outro código.');
-
-        desafioEmailId = result.challengeId;
-        desafioEmailEndereco = email;
-        document.getElementById('den-email-code').value = '';
-        message.textContent = 'Novo código enviado. Ele expira em 10 minutos.';
-    } catch (error) {
-        message.textContent = error.message || 'Não foi possível enviar outro código.';
-    } finally {
-        button.disabled = false;
-    }
-}
-
-async function enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, data, imagem, email, emailVerificationToken) {
+async function enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, data, imagem) {
     const nova = {
         protocolo,
         tipo,
@@ -631,11 +597,6 @@ async function enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, da
         data,
         imagem
     };
-    if (email) {
-        nova.email = email;
-        nova.emailVerificationToken = emailVerificationToken;
-    }
-
     const headers = { 'Content-Type': 'application/json' };
     if (accountSession) {
         headers.Authorization = `Bearer ${accountSession.token}`;
@@ -653,42 +614,25 @@ async function enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, da
     if (!response.ok) {
         if (response.status === 401 && accountSession) {
             accountSession = null;
+            sessionStorage.removeItem('zerafoco_citizen_session');
+            sessionStorage.removeItem('zerafoco_citizen_screen');
             throw new Error('Sua sessão expirou. Entre novamente com CPF e senha.');
         }
         if (response.status === 401 && demoSession) {
             demoSession = null;
             throw new Error('A sessão demonstrativa expirou. Inicie a simulação novamente.');
         }
-        if (response.status === 401 && email) {
-            emailVerificadoToken = null;
-            emailVerificadoEndereco = '';
-            desafioEmailId = null;
-            desafioEmailEndereco = '';
-            throw new Error(result.erro || 'Confirme seu e-mail novamente antes de enviar.');
-        }
         throw new Error(result.erro || 'Não foi possível registrar a denúncia.');
     }
 
     document.getElementById('denuncia-form').reset();
-    desafioEmailId = null;
-    desafioEmailEndereco = '';
-    emailVerificadoToken = null;
-    emailVerificadoEndereco = '';
-    document.getElementById('den-email-verification').classList.add('hidden');
-    document.getElementById('den-email-verification-message').textContent = '';
-    renderCitizenProtocols(protocolo, result.chaveRecuperacao, result.emailEnviado, result.avisoEmail);
+    renderCitizenProtocols(protocolo, result.chaveRecuperacao);
     document.getElementById('submit-denuncia-label').textContent = demoSession
         ? 'Enviar denúncia identificada (simulação)'
         : (accountSession ? 'Enviar denúncia para minha conta' : 'Enviar denúncia sem identificação');
 
     if (accountSession) {
         alert(`Denúncia registrada! Protocolo: ${protocolo}. Ela foi salva em Minhas denúncias.`);
-    } else if (result.emailEnviado) {
-        alert(result.chaveRecuperacao
-            ? 'Denúncia registrada. Enviamos o protocolo e a chave de recuperação para o e-mail confirmado.'
-            : 'Denúncia registrada. Enviamos o protocolo para o e-mail confirmado.');
-    } else if (result.avisoEmail) {
-        alert(result.avisoEmail);
     } else if (result.chaveRecuperacao) {
         alert(`Denúncia registrada!\nProtocolo: ${protocolo}\nChave de recuperação: ${result.chaveRecuperacao}\nGuarde a chave: ela não será exibida novamente.`);
     } else {
@@ -696,7 +640,7 @@ async function enviarDenuncia(protocolo, tipo, endereco, descricao, lat, lng, da
     }
 }
 
-function renderCitizenProtocols(protocolo, chaveRecuperacao, emailEnviado = false, avisoEmail = '') {
+function renderCitizenProtocols(protocolo, chaveRecuperacao) {
     const container = document.getElementById('citizen-protocols');
     container.innerHTML = `
         <div class="rounded-xl border border-brand-100 bg-brand-50 p-4">
@@ -726,8 +670,6 @@ function renderCitizenProtocols(protocolo, chaveRecuperacao, emailEnviado = fals
                 <p class="mt-3 rounded-lg border border-sky-200 bg-sky-50 p-3 text-xs leading-relaxed text-sky-900">Esta conta é demonstrativa e ainda não possui histórico pessoal para recuperar o protocolo. Guarde o código acima.</p>
             ` : ''}
             <p class="mt-2 text-xs text-brand-800">${accountSession ? 'A equipe analisará o relato antes de qualquer encaminhamento. Consulte seus protocolos em Minhas denúncias.' : 'A equipe analisará o relato antes de qualquer encaminhamento. Consulte o andamento na página inicial usando este código.'}</p>
-            ${emailEnviado ? '<p class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700"><i data-lucide="mail-check" class="h-4 w-4"></i> Recibo enviado ao e-mail confirmado.</p>' : ''}
-            ${avisoEmail ? `<p class="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900">${escaparHtml(avisoEmail)}</p>` : ''}
         </div>
     `;
     document.getElementById('copy-citizen-protocol').addEventListener('click', event => {
@@ -755,6 +697,17 @@ async function copiarTexto(button, texto, status, labelCopiado, mensagemSucesso)
 
 function statusParaExibicao(status) {
     return status === 'Pendente' ? 'Pendente de triagem' : status;
+}
+
+function descricaoStatusDenuncia(status) {
+    return {
+        'Pendente': 'Sua denúncia foi recebida e aguarda a triagem da equipe. Ela será analisada antes de qualquer encaminhamento.',
+        'Em Análise': 'A equipe está avaliando a denúncia e as informações enviadas.',
+        'Encaminhada': 'A denúncia foi encaminhada para atendimento pela equipe responsável.',
+        'Aguardando informações': 'A análise está aguardando informações complementares para continuar.',
+        'Encerrada sem encaminhamento': 'A análise foi encerrada sem encaminhamento para atendimento.',
+        'Resolvido': 'O atendimento foi concluído conforme a última atualização da equipe.'
+    }[status] || 'Consulte novamente mais tarde para verificar se houve atualização.';
 }
 
 async function consultarProtocolo(event) {
